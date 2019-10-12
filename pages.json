@@ -1,0 +1,516 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/wxAuth/wxAuth",
+			"style": {
+				"navigationBarTitleText": "微信授权",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},{
+			"path": "pages/shareAuth/shareAuth",
+			"style": {
+				"navigationBarTitleText": "微信授权",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/share/share",
+			"style": {
+				"navigationBarTitleText": "车辆列表",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/share/shareInfo",
+			"style": {
+				"navigationBarTitleText": "车辆详情",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/share/storeCarInfo",
+			"style": {
+				"navigationBarTitleText": "微店车辆详情",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/bindPhone/bindPhone",
+			"style": {
+				"navigationBarTitleText": "绑定手机号",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/home/lookCar",
+			"style": {
+				"navigationBarTitleText": "找车",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/home/city",
+			"style": {
+				"navigationBarTitleText": "城市选择",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/bid/bid",
+			"style": {
+				"navigationBarTitleText": "查看出价",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/popularize/popularize",
+			"style": {
+				"navigationBarTitleText": "推广更新",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},{
+			"path": "pages/popularize/generalize",
+			"style": {
+				"navigationBarTitleText": "推广",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/home/manage",
+			"style": {
+				"navigationBarTitleText": "管理助手",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/release/release",
+			"style": {
+				"navigationBarTitleText": "发布",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/VIPcenter/payVip",
+			"style": {
+				"navigationBarTitleText": "购买VIP",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/strikePrice/historicalPrice/historicalPrice",
+			"style": {
+				"navigationBarTitleText": "历史成交价格",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/Message",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/Employee/Employee",
+			"style": {
+				"navigationBarTitleText": "员工账号管理",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		}, {
+			"path": "pages/user/Employee/addAccount/addAccount",
+			"style": {
+				"navigationBarTitleText": "新建账号",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/Collectlist/collectInfo/collectInfo",
+			"style": {
+				"navigationBarTitleText": "收车详情",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/strikePrice/strikePrice",
+			"style": {
+				"navigationBarTitleText": "查询成交价",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/home/agreement",
+			"style": {
+				"navigationBarTitleText": "二手车辆交易电子合同",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/Wishlist/Duetocollect/Duetocollect",
+			"style": {
+				"navigationBarTitleText": "预定收车",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/Wishlist/Wishlist",
+			"style": {
+				"navigationBarTitleText": "心愿单",
+				"enablePullDownRefresh": false // 是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/Collectlist/Collectlist",
+			"style": {
+				"navigationBarTitleText": "收车",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/Collectlist/sellCars",
+			"style": {
+				"navigationBarTitleText": "卖车",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/smallShop/Estimated/Estimated",
+			"style": {
+				"navigationBarTitleText": "车估价",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/smallShop/smallShop",
+			"style": {
+				"navigationBarTitleText": "微店",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},{
+			"path": "pages/smallShop/smallShopSeach",
+			"style": {
+				"navigationBarTitleText": "微店车源",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/smallShop/lookingFor/lookingFor",
+			"style": {
+				"navigationBarTitleText": "求购信息",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/smallShop/vehicleDetails/vehicleDetails",
+			"style": {
+				"navigationBarTitleText": "微店车辆详情",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{ //收车	
+			"path": "pages/Collectlist/collectNew/collectNew",
+			"style": {
+				"navigationBarTitleText": "收车新增",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/vehicleInformation/vehicleInformation",
+			"style": {
+				"navigationBarTitleText": "车辆信息已售",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/synchronized/synchronized",
+			"style": {
+				"navigationBarTitleText": "车辆信息未同步",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/sale/sale",
+			"style": {
+				"navigationBarTitleText": "车辆信息",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/release/procedures/procedures",
+			"style": {
+				"navigationBarTitleText": "手续信息",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/Collectlist/salecar/salecar",
+			"style": {
+				"navigationBarTitleText": "卖车新增",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		}, {
+			"path": "pages/Collectlist/payCar/payCarInfo",
+			"style": {
+				"navigationBarTitleText": "卖车详情",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/vehicleDetails/vehicleDetail",
+			"style": {
+				"navigationBarTitleText": "车辆详情页",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/bid/checkPrice",
+			"style": {
+				"navigationBarTitleText": "出价车辆详情",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/management/management",
+			"style": {
+				"navigationBarTitleText": "微店管理",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/Collectlist/customerManagement",
+			"style": {
+				"navigationBarTitleText": "客户管理",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/strikePrice/priceDetails/priceDetails",
+			"style": {
+				"navigationBarTitleText": "成交价详情",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/myShare/myShare",
+			"style": {
+				"navigationBarTitleText": "我的分享",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/VIPcenter/VIPcenter",
+			"style": {
+				"navigationBarTitleText": "会员中心",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/myorder/myorder",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/user/orderDetails/orderDetails",
+			"style": {
+				"navigationBarTitleText": "二手车辆交易电子合同",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+			"path": "pages/modelsChoose/brand",
+			"style": {
+				"navigationBarTitleText": "品牌选择",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+            "path" : "pages/modelsChoose/branMdodels/branMdodels",
+            "style" : {
+				"navigationBarTitleText": "车型选择",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+        }
+        ,{
+            "path" : "pages/modelsChoose/branMdodels/details/details",
+            "style" : {
+				"navigationBarTitleText": "品牌车型详情",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+        }
+        ,{
+            "path" : "pages/Wishlist/wishDetails/wishDetails",
+            "style" : {
+            	"navigationBarTitleText": "心愿单详情",
+            	"enablePullDownRefresh": false //是否开启下拉的刷新
+            }
+        }
+		,{
+		    "path" : "pages/user/modify",
+		    "style" : {
+		    	"navigationBarTitleText": "个人信息修改",
+		    	"enablePullDownRefresh": false //是否开启下拉的刷新
+		    }
+		}
+		,{
+		    "path" : "pages/user/balance",
+		    "style" : {
+		    	"navigationBarTitleText": "余额",
+		    	"enablePullDownRefresh": false //是否开启下拉的刷新
+		    }
+		}
+		,{
+		    "path" : "pages/user/records/records",
+		    "style" : {
+		    	"navigationBarTitleText": "浏览记录",
+		    	"enablePullDownRefresh": false //是否开启下拉的刷新
+		    }
+		}
+		,{
+		    "path" : "pages/user/records/recordsdetails/recordsdetails",
+		    "style" : {
+		    	"navigationBarTitleText": "浏览记录详情",
+		    	"enablePullDownRefresh": false //是否开启下拉的刷新
+		    }
+		}
+		,{
+		    "path" : "pages/user/feedback",
+		    "style" : {
+		    	"navigationBarTitleText": "意见反馈",
+		    	"enablePullDownRefresh": false //是否开启下拉的刷新
+		    }
+		}
+        ,{
+            "path" : "pages/vehicleDetails/searchListings/searchListings",
+            "style" : {
+				"navigationBarTitleText": "平台车源",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+        }
+        ,{
+            "path" : "pages/user/topUp/topUp",
+            "style" : {
+				"navigationBarTitleText": "账户充值",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+        }
+        ,{
+            "path" : "pages/utility/utility",
+            "style" : {
+				"navigationBarTitleText": "维保查询",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+        }
+        ,{
+            "path" : "pages/utility/maintenance/maintenance",
+            "style" : {
+				"navigationBarTitleText": "查询纪录",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+        }
+        ,{
+            "path" : "pages/utility/Outside/Outside",
+            "style" : {
+				"navigationBarTitleText": "信息",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+        }
+        ,{
+            "path" : "pages/utility/recognition",
+            "style" : {
+				"navigationBarTitleText": "车型识别",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+        },
+		{
+		    "path" : "pages/utility/insurance",
+		    "style" : {
+				"navigationBarTitleText": "车险纪录",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+		    "path" : "pages/utility/Actingapture",
+		    "style" : {
+				"navigationBarTitleText": "罚款代缴",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+		    "path" : "pages/user/aboutUs",
+		    "style" : {
+				"navigationBarTitleText": "关于我们",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		},
+		{
+		    "path" : "pages/share/shareShop",
+		    "style" : {
+				"navigationBarTitleText": "微店",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+		}
+        ,{
+            "path" : "pages/userAgreement/userAgreement",
+            "style" : {
+				"navigationBarTitleText": "用户协议",
+				"enablePullDownRefresh": false //是否开启下拉的刷新
+			}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"ignoreVersion": true //true表示忽略版本检查提示框，HBuilderX1.9.0及以上版本支持  
+		}
+	},
+	"tabBar": {
+		"color": "#252525",
+		"selectedColor": "#A57BFF",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/home/index",
+				"iconPath": "static/icon/index.png",
+				"selectedIconPath": "static/icon/index-active.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/release/release",
+				"iconPath": "static/icon/add.png",
+				"selectedIconPath": "static/icon/add-active.png",
+				"text": "发布"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/icon/user.png",
+				"selectedIconPath": "static/icon/user-active.png",
+				"text": "我的"
+			}
+		]
+	}
+}

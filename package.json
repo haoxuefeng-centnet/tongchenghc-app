@@ -1,0 +1,17 @@
+{
+  "name": "app-demo",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gyang18",
+  "license": "ISC",
+  "dependencies": {
+    "@dcloudio/uni-ui": "0.0.8",
+    "vue-touch": "^2.0.0-beta.4"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
+}
