@@ -8,7 +8,7 @@ if(process.env.NODE_ENV === 'development') {
 
 // baseUrl = 'http://test.app.yaominyu.com/api-app'
 
-// baseUrl = 'http://192.168.1.203:8086/api-app'
+// baseUrl = 'http://192.168.0.110:8086/api-app'
 
 baseUrl = 'https://app.schyxgl.com/api-app'
 // baseUrl = 'http://47.103.195.58/server/index.php?g=Web&c=Mock&o=simple&projectID=3&uri=/api-app'

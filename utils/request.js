@@ -77,6 +77,7 @@ export const req = (cifg = {}) => {
 									// 请求参数有误
 								case 602:
 									msg = "请求参数有误"
+                  break;
 									// 用户未授权
 								case 410:
 									msg = "您未授权"

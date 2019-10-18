@@ -14,7 +14,7 @@
 					:interval="interval"
 					:duration="duration"
 				>
-					<swiper-item v-for="(item, index) in shuffling" :key="index"><image class="swiper-item" :src="item.url"></image></swiper-item>
+					<swiper-item v-for="(item, index) in shuffling" :key="index"><image class="swiper-item" mode="aspectFill" @tap="previewImage(index)" :src="item.url"></image></swiper-item>
 				</swiper>
 			</view>
 			<view class="nav-boox">
@@ -222,7 +222,21 @@ export default {
 					phoneNumber: `${this.ageInformation.cusPhone}` 
 				});
 			}
-		}
+		},
+    // 预览图片
+    previewImage(index) {
+      let list = this.shuffling.map(item => item.url);
+      uni.previewImage({
+        current: index,
+        urls: list,
+        success() {
+          
+        },
+        fail() {
+          utils.showTextToast('预览图片失败');
+        }
+      });
+    }
 	},
 	
 };

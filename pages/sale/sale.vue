@@ -71,11 +71,11 @@
             <text class="iconfont boos-icons">&#xe627;</text>
           </picker>
         </view>
-        <view class="boos-lise">
+       <!-- <view class="boos-lise">
           <view class="boos-title">车牌号</view>
           <input placeholder="请输入" name="carLicense" :value="carData.carLicense" />
           <text class="iconfont boos-icons">&#xe627;</text>
-        </view>
+        </view> -->
         <view class="boos-lise">
           <view class="boos-title">使用性质<text class="hint">*</text></view>
           <picker class="boos-picker boos-picker-width" @change="natureChange" :value="index" :range="usingNature">
@@ -83,27 +83,27 @@
             <text class="iconfont boos-icons">&#xe627;</text>
           </picker>
         </view>
-        <view class="boos-lise">
+      <!--  <view class="boos-lise">
           <view class="boos-title">出厂日期</view>
           <picker class="boos-picker boos-picker-width" mode="date" :value="carFactoryTime" start="1995-0-0" end="endDate"
             @change="DateChanges">
             <view class="pickerboos" :class="carFactoryTime == '' ? 'active' : ''">{{ carFactoryTime != '' ? carFactoryTime : '请选择' }}</view>
             <text class="iconfont boos-icons">&#xe627;</text>
           </picker>
-        </view>
-        <view class="boos-lise">
+        </view> -->
+       <!-- <view class="boos-lise">
           <view class="boos-title">年检到期日</view>
           <picker class="boos-picker boos-picker-width" mode="date" :value="carMaturityTime" start="1995-0-0" end="endDate"
             @change="DateChangeinspection">
             <view class="pickerboos" :class="carMaturityTime == '' ? 'active' : ''">{{ carMaturityTime != '' ? carMaturityTime : '请选择' }}</view>
             <text class="iconfont boos-icons">&#xe627;</text>
           </picker>
-        </view>
-        <view class="boos-lise">
+        </view> -->
+       <!-- <view class="boos-lise">
           <view class="boos-title" style="margin: auto 0;">钥匙数量</view>
           <input placeholder="请输入钥匙数量" type="number" name="keySum" :value="carData.keySum" />
           <text class="iconfont boos-icons">&#xe627;</text>
-        </view>
+        </view> -->
         <!-- <view class="boos-lise">
 					<view class="boos-title">车架号</view>
 					<input placeholder="请输入车架号"  :value="carData.carVin" name="carVin" />
@@ -183,17 +183,17 @@
 				</view>
 				<view class="boos-lise">
 					<view class="boos-title">网络标价</view>
-					<input placeholder="请输入" maxlength="8" type="digit"  style="width: 75%;" :value="carData.interPrice" name="interPrice" />
+					<input placeholder="请输入" maxlength="8" type="digit"  style="width: 75%;" v-model="carData.interPrice" name="interPrice" />
 					<text class="boos-iconst-text">万元</text>
 				</view>
-				<view class="formalities "><text>手续信息</text></view>
-				<view class="tabList" style="margin-top: 20upx;">
+				<view class="formalities" v-if="false"><text>手续信息</text></view>
+<!-- 				<view class="tabList" style="margin-top: 20upx;">
 					<text class="tabtitle">购置税证</text>
 					<view class="tabList-content ">
 							<text class="iconfont radio" @tap="carTax(3)" v-if="purchaseTax != 1" style=" width: 50upx;color: #989898;font-size: 38upx;">&#xe75b;</text>
 							<text class="iconfont" @tap="carTax(1)" v-if="purchaseTax == 1" style="width: 50upx;color: #A57BFF;font-size: 38upx;">&#xe659;</text>
 							<text style="margin-left: 17upx ;">有</text>
-
+				
 							<text class="iconfont" @tap="carTax(2)" v-if="purchaseTax == 2" style="width: 50upx;color: #A57BFF;font-size: 38upx;margin-left: 17upx;">&#xe659;</text>
 							<text class="iconfont radio" @tap="carTax(4)" v-if="purchaseTax != 2" style=" width: 50upx;color: #989898;font-size: 38upx;">&#xe75b;</text>
 							<text style="margin-left: 17upx ;">无</text>
@@ -281,7 +281,7 @@
 						<text class="iconfont radio" @tap="carvehiclelicense(4)" v-if="cbTax != 2" style=" width: 50upx;color: #989898;font-size: 38upx;">&#xe75b;</text>
 						<text style="margin-left: 17upx ;">无</text>
 					</view>
-				</view>
+				</view> -->
 				<view class="index-bottom">
 					<view class="index-bottom-content" @tap="selectShop(1)">
 						<text class="iconfont " style=" width: 50upx;color: #989898;font-size: 38upx;" v-if="smallShop">&#xe75b;</text>
@@ -364,12 +364,15 @@ export default {
 			nciManual: '',
 			calInsurance: '',
 			cbTax: '',
-			carStatus: ''
+			carStatus: '',
+      carPicture: [],
 		};
 	},
 	onLoad(query) {
-		this.carId = query.carId;
+		// this.carId = query.carId;
+		this.carId = 251;
 		carInfo({ carId: this.carId }).then(res => {
+      this.carPicture = res.data.carImgList;
 			for(var i in res.data){
 				if(!res.data[i] && res.data[i] !== 0){
 					res.data[i] = ''
@@ -607,22 +610,9 @@ export default {
 				}
 			}
 		},
-		// 合并对象
-		twoJsonMerge(json1, json2) {
-			var length1 = 0,
-				length2 = 0,
-				jsonStr,
-				str;
-			for (var ever in json1) length1++;
-			for (var ever in json2) length2++;
-			if (length1 && length2) str = ',';
-			else str = '';
-			jsonStr = (JSON.stringify(json1).replace(/,}/, '}') + JSON.stringify(json2).replace(/,}/, '}')).replace(/}{/, str);
-			return JSON.parse(jsonStr);
-		},
 		// 提交
 		submitFrom(e) {
-			if (this.carImg1 == '' || this.carImg2 == '' || this.carImg3 == '') {
+			if (this.carImg1 == '' && this.carImg2 == '' && this.carImg3 == '') {
 				utils.showTextToast('请上传车辆照片');
 				return;
 			}
@@ -634,10 +624,10 @@ export default {
         utils.showTextToast('表显里程小数点后最多两位');
         return;
       }
-			if (this.boardDate == '') {
-				utils.showTextToast('请选择初次上牌时间');
-				return;
-			}
+			// if (this.boardDate == '') {
+			// 	utils.showTextToast('请选择初次上牌时间');
+			// 	return;
+			// }
 			if (this.carNature == '') {
 				utils.showTextToast('请选择使用性质');
 				return;
@@ -662,6 +652,7 @@ export default {
 				carImg1: this.carImg1,
 				carImg2: this.carImg2,
 				carImg3: this.carImg3,
+        // carImgs: this.carPicture,
 				carColor: this.carColor,
 				carType: this.carType,
 				carOldBoadTime: this.carOldBoadTime,
@@ -688,7 +679,8 @@ export default {
 				carStatus: this.carStatus,
 				carId: this.carId
 			};
-			let parameters = this.twoJsonMerge(e.detail.value, data);
+      console.log(this.carData);
+			let parameters = {...this.carData, ...data };
 			carUpdate(parameters).then(res => {
 				if (res.code == 200) {
 					uni.setStorage({

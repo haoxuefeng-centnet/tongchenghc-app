@@ -6,7 +6,10 @@
 			<!-- 轮播图 -->
 			<view>
 				<swiper class="nav-swiper" :indicator-dots="false" :autoplay="true" :interval="2000" :duration="500">
-					<swiper-item>
+          <swiper-item v-for="(item, index) in carPicture" :key="index">
+          	<image class="swiper-item" mode="aspectFill" @tap="previewImage(index)" :src="item"></image>
+          </swiper-item>
+				<!-- 	<swiper-item>
 						<image class="swiper-item" :src="carInfo.carImg1"></image>
 					</swiper-item>
 					<swiper-item>
@@ -14,7 +17,7 @@
 					</swiper-item>
 					<swiper-item>
 						<image class="swiper-item" :src="carInfo.carImg3"></image>
-					</swiper-item>
+					</swiper-item> -->
 				</swiper>
 			</view>
 			<view class="nav-boox">
@@ -150,7 +153,8 @@ export default {
 				isVip: false  ,//是否VIP
 				creater:'' ,//创建者信息
 				id:'', //创建者ID
-				carData: {}
+				carData: {},
+        carPicture: [],
 			}
 		},
 		onLoad(query) {
@@ -187,6 +191,7 @@ export default {
 					this.carInfo = res.data.carInfo || {};
 					this.carList = res.data.matched || [];
 					this.creater = res.data.creater;
+          this.carPicture= [this.carInfo.carImg1, this.carInfo.carImg2, this.carInfo.carImg3];
 					if(this.carList.length == 0){
 						this.noData = true
 					}else{
@@ -272,7 +277,20 @@ export default {
 				uni.makePhoneCall({
 					phoneNumber: `${this.carInfo.cusPhone}` 
 				});
-			}
+			},
+      // 预览图片
+      previewImage(index) {
+        uni.previewImage({
+          current: index,
+          urls: this.carPicture,
+          success() {
+            
+          },
+          fail() {
+            utils.showTextToast('预览图片失败');
+          }
+        });
+      }
 		}
 	}
 </script>
