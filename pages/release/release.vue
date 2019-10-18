@@ -3,18 +3,29 @@
 	<view class="index">
 		<!-- image 上传-->
 		<view class="indexImage">
-			<view class="indexImages">
-				<view class="indexImages-a" @tap="upload('carImg1')" v-if="carImg1 == ''">
+      <template v-if="carPicture.length">
+        <view class="indexImages" v-for="(item, index) in carPicture" :key="item">
+          <image class="indexImages-image" :src="item" mode="mode"></image>
+          <view class="del-btn" @click="removeUploadImg(index)">
+            <image src="../../static/icon/delete.png" mode="mode"></image>
+          </view>
+        	<text class="indexImages-title">
+        		车辆照片
+        		<!-- <text class="hint">*</text> -->
+        	</text>
+        </view>
+      </template>
+			<view class="indexImages" v-if="carPicture.length < 3">
+				<view class="indexImages-a" @tap="uploadImg">
 					<text class="iconfont iconfontsize">&#xe81a;</text>
 					<text>上传照片</text>
 				</view>
-				<image class="indexImages-image" @tap="upload('carImg1')" v-if="carImg1 != ''" :src="carImg1" mode=""></image>
 				<text class="indexImages-title">
 					车辆照片
 					<text class="hint">*</text>
 				</text>
 			</view>
-			<view class="indexImages">
+<!-- 			<view class="indexImages">
 				<view class="indexImages-a" @tap="upload('carImg2')" v-if="carImg2 == ''">
 					<text class="iconfont iconfontsize">&#xe81a;</text>
 					<text>上传照片</text>
@@ -35,7 +46,7 @@
 					车辆照片
 					<text class="hint">*</text>
 				</text>
-			</view>
+			</view> -->
 		</view>
 		<!-- 基本信息 -->
 		<view class="index-text">基本信息</view>
@@ -79,10 +90,10 @@
 						<view class="iconfont boos-icons"> &#xe627;</view>
 					</picker>
 				</view>
-				<view class="boos-lise">
+				<!-- <view class="boos-lise">
 					<view class="boos-title">车牌号</view>
 					<input class="boos-picker-width" v-model="carLicense" type="text" maxlength="8" placeholder="请输入" />				
-				</view>
+				</view> -->
 				<view class="boos-lise">
 					<view class="boos-title">使用性质<text class="hint">*</text></view>
 					<picker class="boos-picker boos-picker-width" @change="natureChange" :value="index" :range="usingNature">
@@ -90,26 +101,26 @@
 						<view class="iconfont boos-icons">&#xe627;</view>
 					</picker>
 				</view>
-				<view class="boos-lise">
+				<!-- <view class="boos-lise">
 					<view class="boos-title">出厂日期</view>
 					<picker class="boos-picker boos-picker-width" mode="date" :value="startDate" start="1995-0-0" end="endDate"
 					 @change="DateChanges">
 						<view class="pickerboos" :class="carFactoryTime == '' ? 'active' : ''">{{ carFactoryTime != '' ? carFactoryTime : '请选择' }}</view>
 						<view class="iconfont boos-icons">&#xe627;</view>
 					</picker>
-				</view>
-				<view class="boos-lise">
+				</view> -->
+				<!-- <view class="boos-lise">
 					<view class="boos-title">年检到期日</view>
 					<picker class="boos-picker boos-picker-width" mode="date" :value="startDate" start="1995-0-0" end="endDate"
 					 @change="DateChangeinspection">
 						<view class="pickerboos" :class="carMaturityTime == '' ? 'active' : ''">{{ carMaturityTime != '' ? carMaturityTime : '请选择' }}</view>
 						<view class="iconfont boos-icons">&#xe627;</view>
 					</picker>
-				</view>
-				<view class="boos-lise">
+				</view> -->
+			<!-- 	<view class="boos-lise">
 					<view class="boos-title">钥匙数量</view>
 					<input class="boos-picker-width" v-model="keySum"  type="number" placeholder="请输入钥匙数量" />
-				</view>
+				</view> -->
 				<!-- <view class="boos-lise">
 					<view class="boos-title">车架号<text class="hint">*</text></view>
 					<input class="boos-picker-width"    placeholder="请输入车架号" :value="carVin" name="carVin" />
@@ -184,9 +195,9 @@
 					<input class="boos-picker-width" v-model="interPrice" maxlength="8" type="digit" placeholder="请输入" />
 					<text class="boos-iconst-text">万元</text>
 				</view>
-				<navigator hover-class="none" url="procedures/procedures">
+			<!-- 	<navigator hover-class="none" url="procedures/procedures">
 					<view class="formalities "><text>手续信息</text></view>
-				</navigator>
+				</navigator> -->
 				<view class="index-bottom">
 					<view class="index-bottom-content" @tap="selectShop(1)">
 						<text class="iconfont"  style=" width: 50upx;color: #989898;font-size: 35upx;" v-if="smallShop">&#xe75b;</text>
@@ -210,9 +221,13 @@
 import utils from '../../utils/utils.js';
 import cityData from '../../components/cityData.js';
 import { carPublish } from '../../api/release.js';
+import Upload from '../../utils/upload.js';
+import CoverImage from '../../components/yq-avatar/yq-avatar.vue';
 export default {
+  components: { CoverImage },
 	data() {
 		return {
+      carPicture: [],
 			startDate: '',
 			carOldBoadTime: '',
 			carFactoryTime: '',
@@ -269,9 +284,6 @@ export default {
 		};
 	},
 	onShow() {
-		// let formData = {
-		// 	this.
-		// }
     this.operation = ''
 		uni.getStorage({
 			key: 'carInformation',
@@ -323,13 +335,23 @@ export default {
 			this.carColor = item;
 		},
 		// 图片上传
-		upload(imgKey) {
+		uploadImg() {
 			const that = this;
-			utils.uploadImg({
-				callback(res) {
-					that[imgKey] = res.data;
-				}
-			});
+      Upload.uploadMetod({
+        MaxNumber: 3,
+       headers: {
+          'cusToken': uni.getStorageSync('cusToken'),
+        },
+        successBack(res) {
+          if (that.carPicture.length < 3) {
+            that.carPicture.push(res.data);
+          }
+        },
+        failBack(err) {
+          console.log(err);
+          utils.showTextToast(err.msg);
+        },
+      });
 		},
 		DateChange(e) {
 			this.carOldBoadTime = e.detail.value;
@@ -388,23 +410,10 @@ export default {
 				}
 			}
 		},
-		// 合并对象
-		twoJsonMerge(json1, json2) {
-			var length1 = 0,
-				length2 = 0,
-				jsonStr,
-				str;
-			for (var ever in json1) length1++;
-			for (var ever in json2) length2++;
-			if (length1 && length2) str = ',';
-			else str = '';
-			jsonStr = (JSON.stringify(json1).replace(/,}/, '}') + JSON.stringify(json2).replace(/,}/, '}')).replace(/}{/, str);
-			return JSON.parse(jsonStr);
-		},
 		// 提交
     selet(item) {
     	this.operation = item;
-      if (this.carOldBoadTime =='' || this.wholesalePrice == '' || this.carImg1 == '' || this.carImg2 == '' || this.carImg3 == '' ||this.brandSeries == ''|| this.carGearbox == '' || this.carMileage == ''||this.boardDate == ''||this.carNature == ''||this.cityLocation == '' ||this.cityAttribution == '' ||this.costPrice == '') {
+      if (this.carOldBoadTime =='' || this.wholesalePrice == '' || this.brandSeries == ''|| this.carGearbox == '' || this.carMileage == ''||this.boardDate == ''||this.carNature == ''||this.cityLocation == '' ||this.cityAttribution == '' ||this.costPrice == '') {
       	utils.showTextToast('请完善信息');
       	return;
       }
@@ -412,11 +421,8 @@ export default {
         utils.showTextToast('表显里程小数点后最多两位');
         return;
       }
-      if (this.carInfo) {
       	let data = {
-      		carImg1: this.carImg1,
-      		carImg2: this.carImg2,
-      		carImg3: this.carImg3,
+          carImgs: this.carPicture,
       		carColor: this.carColor,
       		carType: this.carType,
       		carOldBoadTime: this.carOldBoadTime,
@@ -441,17 +447,13 @@ export default {
           keySum:this.keySum
       	};
         
-        let parameter = this.twoJsonMerge(data, this.carInfo);
-      	carPublish(parameter).then(res => {
+      	carPublish(data).then(res => {
       		if (res.code == 200) {
             if(this.operation == 1){
               utils.showTextToast('保存成功');
             }else if(this.operation == 2){
               utils.showTextToast('发布成功');
             }
-      			this.carImg1 = ''
-      			this.carImg2 = ''
-      			this.carImg3 = ''
       			this.carColor = '白色'
       			this.carType = '轿车'
       			this.carOldBoadTime = ''
@@ -493,9 +495,6 @@ export default {
       			utils.showTextToast(res.msg);
       		}
       	});
-      } else {
-      	utils.showTextToast('请填写手续信息');
-      }
     },
 		endDate() {
 			return this.getDate('end');
@@ -513,7 +512,11 @@ export default {
 			month = month > 9 ? month : '0' + month;
 			day = day > 9 ? day : '0' + day;
 			return `${year}-${month}-${day}`;
-		}
+		},
+    // 删除已上传得瑟图片
+    removeUploadImg(index){
+      this.carPicture.splice(index, 1);
+    }
 	}
 };
 </script>
@@ -577,5 +580,28 @@ export default {
 .releasekes{
 	color: #FFFFFF;
 	background:linear-gradient(0deg,rgba(165,123,255,1),rgba(107,115,255,1));
+}
+.indexImage {
+  justify-content: flex-start;
+}
+.indexImages {
+  position: relative;
+  margin: 0 24rpx;
+  .del-btn {
+    width: 42rpx;
+    height: 42rpx;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    image {
+      width: 32rpx;
+      height: 32rpx;
+    }
+  }
 }
 </style>

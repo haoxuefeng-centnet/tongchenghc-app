@@ -7,8 +7,7 @@ export default class utils {
   static secret = "df105563d5559918d6820720a5cd72de";
 
   // 图片上传地址
-  // static uploadImgUrl = 'http://proxy1.autu.live/api-app/upload/img'
-  static uploadImgUrl = 'https://app.schyxgl.com/api-app/upload/img'
+  static uploadImgUrl = configs.BASEURL + '/upload/img'
   // 图片查看地址
   static viewImgUrl = ''
   /**
