@@ -139,7 +139,7 @@
           })
           return temp
         } else {
-          return uni.upx2px(12) + 'px' + ' ' + uni.upx2px(0) + 'px'
+          return uni.upx2px(10) + 'px' + ' ' + uni.upx2px(0) + 'px'
         }
       },
       getNavAttrBorderRadius() {

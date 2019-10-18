@@ -1,8 +1,8 @@
 <!-- 品牌车型选择 -->
 <template>
 	<view>
-		<view class="branMdodels" @tap="limit"><view class="branMdodelsList">不限</view></view>
-		<view class="branMdodels" v-for="(item, index) of modelsList" :key="index">
+		<view v-if="!isShow" class="branMdodels" @tap="limit"><view class="branMdodelsList">不限</view></view>
+		<view v-if="!isShow" class="branMdodels" v-for="(item, index) of modelsList" :key="index">
 			<view class="branMdodelsList" :data-brandId="item.brandId" :data-brandName="item.brandName" @tap="handleClick">{{ item.brandName }}</view>
 		</view>
 		<ScreenLoading :isShow="isShow"></ScreenLoading>

@@ -2,9 +2,9 @@
 <template>
 	<view>
 		<view>
-			<phone-directory :phones="citylist" v-if="citylist" @paramClick="paramClick"></phone-directory>
+			<phone-directory :isShow="!isShow" :phones="citylist" v-if="citylist" @paramClick="paramClick"></phone-directory>
 		</view>
-		<ScreenLoading :isShow="isShow"></ScreenLoading>
+		<!-- <ScreenLoading :isShow="isShow"></ScreenLoading> -->
 	</view>
 </template>
 
