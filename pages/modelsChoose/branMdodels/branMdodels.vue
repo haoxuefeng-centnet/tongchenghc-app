@@ -5,17 +5,12 @@
 		<view v-if="!isShow" class="branMdodels" v-for="(item, index) of modelsList" :key="index">
 			<view class="branMdodelsList" :data-brandId="item.brandId" :data-brandName="item.brandName" @tap="handleClick">{{ item.brandName }}</view>
 		</view>
-		<ScreenLoading :isShow="isShow"></ScreenLoading>
 	</view>
 </template>
 
 <script>
-import ScreenLoading from '../../../colorui/components/screen-loading.vue'
 import { brandSeries } from '../../../api/models.js';
 export default {
-	components: {
-		ScreenLoading
-	},
 	data() {
 		return {
 			id: '',
@@ -28,6 +23,9 @@ export default {
 	onLoad: function(option) {
 		this.id = option.id;
 		this.name = option.name;
+    uni.showLoading({
+        title: '加载中'
+    });
 	},
 	methods: {
 		// 点击不限
@@ -55,7 +53,8 @@ export default {
 		brandSeries({ brandId: this.id }).then(res => {
 			if(res.code == 200){
 				this.modelsList = res.data;
-				this.isShow = false
+				this.isShow = false;
+        uni.hideLoading();
 			}
 		});
 	}

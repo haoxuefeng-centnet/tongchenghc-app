@@ -6,7 +6,6 @@
 			scroll-y="true"
 			:scroll-with-animation="scrollAnimationOFF"
 			:scroll-into-view="scrollViewId"
-			style=" height: 100%;"
 			@scroll="handleScroll"
 		>
 			<view class="phone-list" >
@@ -66,21 +65,22 @@ export default {
 			this.$emit('handleClick', e.target.dataset);
 		},
 		handleScroll(e) {
-			if (this.letterDetails.length === 0) {
-				let view = uni.createSelectorQuery().selectAll('.list-item');
-				view.boundingClientRect(data => {
-					let top = data[0].top;
-					data.forEach((item, index) => {
-						item.top = item.top - top;
-						item.bottom = item.bottom - top;
-						this.letterDetails.push({
-							id: item.id,
-							top: item.top,
-							bottom: item.bottom
-						});
-					});
-				}).exec();
-			}
+			// if (this.letterDetails.length === 0) {
+			// 	let view = uni.createSelectorQuery().selectAll('.list-item');
+			// 	view.boundingClientRect(data => {
+   //        console.log(data)
+			// 		let top = data[0].top;
+			// 		data.forEach((item, index) => {
+			// 			item.top = item.top - top;
+			// 			item.bottom = item.bottom - top;
+			// 			this.letterDetails.push({
+			// 				id: item.id,
+			// 				top: item.top,
+			// 				bottom: item.bottom
+			// 			});
+			// 		});
+			// 	}).exec();
+			// }
 
 			const scrollTop = e.detail.scrollTop;
 			this.letterDetails.some((item, index) => {
@@ -112,6 +112,7 @@ export default {
 	flex-direction: column;
 	position: relative;
 	width: 100%;
+  /* height: 100%; */
 }
 
 .list-item {

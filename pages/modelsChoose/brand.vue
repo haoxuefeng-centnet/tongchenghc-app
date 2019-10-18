@@ -9,7 +9,6 @@
 </template>
 
 <script>
-	import ScreenLoading from '../../colorui/components/ui-loading.vue'
 	import {
 		brandAlone
 	} from '../../api/models.js'
@@ -17,8 +16,7 @@
 	export default {
 		name: "phones",
 		components: {
-			phoneDirectory,
-			ScreenLoading
+			phoneDirectory
 		},
 		data() {
 			return {
@@ -30,9 +28,13 @@
 			}
 		},
 		onLoad() {
+      uni.showLoading({
+          title: '加载中'
+      });
 		brandAlone().then(res => {
 			if (res.code == 200) {
 				this.citylist = res.data
+        uni.hideLoading();
 			}
 		}).finally(() => {
 			this.isShow = false

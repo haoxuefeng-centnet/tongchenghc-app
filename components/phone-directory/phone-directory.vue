@@ -1,5 +1,5 @@
 <template>
-	<view class="phone-main" :style="{height: winHeight + 'px'}">
+	<view class="phone-main" >
 		<view class="phoneDirectory">
 			<phone-list 
 			:phones="phones" 
@@ -53,13 +53,13 @@
 		mounted () {
 			let windowHeight = uni.getSystemInfoSync().windowHeight
 			
-			// #ifndef APP-PLUS
-			this.winHeight = windowHeight
-			//#endif
+			// // #ifndef APP-PLUS
+			// this.winHeight = windowHeight
+			// //#endif
 			
-			//#ifdef APP-PLUS
-			this.winHeight = windowHeight - 56
-			//#endif
+			// //#ifdef APP-PLUS
+			// this.winHeight = windowHeight - 56
+			// //#endif
 			
  			if(!this.phones){
 				uni.showToast({

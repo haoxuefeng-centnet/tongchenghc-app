@@ -5,18 +5,13 @@
 		<view v-if="!isShow" class="branMdodels" v-for="(item, index) of modelsList" :key="index" >
 			<view class="branMdodelsList" :data-brandName="item.brandName"  @tap="handleClick">{{ item.brandName }}</view>
 		</view>
-		<ScreenLoading :isShow="isShow"></ScreenLoading>
 	</view>
 	
 </template>
 
 <script>
-import ScreenLoading from '../../../../colorui/components/screen-loading.vue'
 import { brandInfos } from '../../../../api/models.js';
 export default {
-	components: {
-		ScreenLoading
-	},
 	data() {
 		return {
 			id: '',
@@ -53,12 +48,16 @@ export default {
 	onLoad: function(option) {
 		this.id = option.id;
 		this.name = option.name;
+    uni.showLoading({
+        title: '加载中'
+    });
 	},
 	onShow() {
 		brandInfos({ brandId: this.id }).then(res => {
 			if(res.code == 200){
 				this.modelsList = res.data;
-				this.isShow = false
+				this.isShow = false;
+        uni.hideLoading();
 			}
 		});
 	}

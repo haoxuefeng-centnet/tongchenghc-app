@@ -5,15 +5,15 @@
 		:key="key"
 		:data-key="key"
 		@touchstart="handleTouchStart"
-		@touchmove = "handleTouchMove"
 		@touchend="handleTouchEnd"
 		@touchcancel="handleTouchCancel" 
 		>
+    <!-- @touchmove = "handleTouchMove" -->
 			{{key}}
 		</view>
-		<view class="alphabet-alert" v-if="touchmove">
+		<!-- <view class="alphabet-alert" v-if="touchmove">
 			{{activeClass}}
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -44,29 +44,30 @@
 		},
 		methods:{
 			handleTouchStart (e) {
+        
 				this.$emit('reset',false)
 				let key = e.target.dataset.key
 				this.activeClass = key
 				this.$emit('change',e.target.dataset.key)
 				this.touchStatus = true
 			},
-			handleTouchMove (e) {
-				this.$emit('scrollAnimationOFF',false)
-				if(this.touchStatus){
-					this.touchmove = true
-					if(this.timer){
-						clearTimeout(this.timer)
-					}
-					this.timer = setTimeout(()=>{
-						const touchY = e.touches[0].clientY - 54
-						const index = Math.floor(touchY / 20)
-						if(index >= 0 && index < this.phonesArr.length){
-							this.activeClass = this.phonesArr[index]
-							this.$emit('change',this.phonesArr[index])
-						} 
-					},16)
-				}
-			},
+			// handleTouchMove (e) {
+			// 	this.$emit('scrollAnimationOFF',false)
+			// 	if(this.touchStatus){
+			// 		this.touchmove = true
+			// 		if(this.timer){
+			// 			clearTimeout(this.timer)
+			// 		}
+			// 		this.timer = setTimeout(()=>{
+			// 			const touchY = e.touches[0].clientY - 54
+			// 			const index = Math.floor(touchY / 20)
+			// 			if(index >= 0 && index < this.phonesArr.length){
+			// 				this.activeClass = this.phonesArr[index]
+			// 				this.$emit('change',this.phonesArr[index])
+			// 			} 
+			// 		},16)
+			// 	}
+			// },
 			handleTouchEnd (e) {
 				this.$emit('scrollAnimationOFF',true)
 				this.touchStatus = false
