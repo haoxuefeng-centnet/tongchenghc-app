@@ -92,10 +92,10 @@
 }
 
 .alphabet-item{
-	width: 40upx;
-	font-size:20upx; 
-	height: 40upx;
-	line-height: 40upx;
+	width: 46upx;
+	font-size:26upx; 
+	height: 46upx;
+	line-height: 46upx;
 	
 }
 
