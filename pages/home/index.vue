@@ -62,24 +62,24 @@
 						</view>
 					</view>
 					<!-- <navigator class="tools-content flex" url="../utility/recognition"> -->
-					<view class="tools-content flex">
+					<!-- <view class="tools-content flex">
 						<view class="tools-contents flex flex-direction" @tap="notOpened">
 							<text class="iconfont" style="font-size: 66upx;">&#xe686;</text>
 							<text class="tools-text">车型识别</text>
 						</view>
-					</view>
-					<view class="tools-content flex" @tap="notOpened">
+					</view> -->
+					<!-- <view class="tools-content flex" @tap="notOpened">
 						<view class="tools-contents flex flex-direction">
 							<text class="iconfont">&#xe614;</text>
 							<text class="tools-text">查违章</text>
 						</view>
-					</view>
-					<view class="tools-content flex" @tap="notOpened">
+					</view> -->
+		<!-- 			<view class="tools-content flex" @tap="notOpened">
 						<view class="tools-contents flex flex-direction">
 							<text class="iconfont">&#xe610;</text>
 							<text class="tools-text">车估价</text>
 						</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 			<view class="home-list" style="padding-bottom: 60upx;">
