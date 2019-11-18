@@ -369,8 +369,8 @@ export default {
 		};
 	},
 	onLoad(query) {
-		// this.carId = query.carId;
-		this.carId = 251;
+		this.carId = query.carId;
+		// this.carId = 251;
 		carInfo({ carId: this.carId }).then(res => {
       this.carPicture = res.data.carImgList;
 			for(var i in res.data){

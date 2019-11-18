@@ -52,6 +52,7 @@ export default {
 					successBack && successBack();
 				},
 				fail: function(err) {
+          console.error(JSON.stringify(err))
 					err.errMsg.indexOf('cancel') !== -1 ? utils.showTextToast('取消了支付') : utils.showTextToast('发起支付失败');
 					failBack && failBack()
 				}

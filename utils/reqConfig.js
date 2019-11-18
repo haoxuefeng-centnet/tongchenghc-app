@@ -4,17 +4,9 @@ let baseUrl = ''
 // 当前环境判断
 if(process.env.NODE_ENV === 'development') {
   // 测试请求地址
-// baseUrl = 'http://proxy1.autu.live/api-app'
 
-// baseUrl = 'http://test.app.yaominyu.com/api-app'
-
-// baseUrl = 'http://192.168.0.110:8086/api-app'
-/**
- * https://app.schyxgl.com
- * https://customer.che300.com
- * **/
+// baseUrl = 'http://192.168.0.112:8086/api-app'
 baseUrl = 'https://app.schyxgl.com/api-app'
-// baseUrl = 'http://47.103.195.58/server/index.php?g=Web&c=Mock&o=simple&projectID=3&uri=/api-app'
 } else if (process.env.NODE_ENV === 'production') {
  // 生产环境
    baseUrl = 'https://app.schyxgl.com/api-app'

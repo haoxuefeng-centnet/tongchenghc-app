@@ -14,7 +14,7 @@
 					:interval="interval"
 					:duration="duration"
 				>
-					<swiper-item v-for="(item, index) in shuffling" :key="index"><image class="swiper-item" mode="aspectFill" @tap="previewImage(index)" :src="item.url"></image></swiper-item>
+					<swiper-item v-if="item.url" v-for="(item, index) in shuffling" :key="index"><image class="swiper-item" mode="aspectFill" @tap="previewImage(index)" :src="item.url"></image></swiper-item>
 				</swiper>
 			</view>
 			<view class="nav-boox">

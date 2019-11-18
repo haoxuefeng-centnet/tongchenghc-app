@@ -480,7 +480,8 @@ export default {
             this.keySum = ''
             this.changeType = 0
             this.emissionsType = 0
-            this.fuelType = 0
+            this.fuelType = 0;
+            this.carPicture = [];
       			uni.setStorage({
       				key: 'carInformation',
       				success: function() {

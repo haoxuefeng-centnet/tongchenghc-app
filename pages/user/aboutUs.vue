@@ -6,7 +6,7 @@
 		<view class="flex flex-direction align-center">
 			<view class="ustop flex flex-direction align-center">
 				<image class="usimage" src="../../static/logo.png"></image>
-				<view class="ustop-tell">同行好车</view>
+				<!-- <view class="ustop-tell">同行好车</view> -->
 			</view>
 			<text class="ustext">专注于二手车同行批发，车商店铺管理电商平台.在这里能够找寻车源信息，并进行二手车批发，既包含为车商提供B2B服务等.成立于2015年3月，为车商提供更好的找车管理平台.</text>
 			<view class="copyright flex flex-direction align-center">

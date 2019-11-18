@@ -6,7 +6,7 @@
 			<!-- 轮播图 -->
 			<view>
 				<swiper class="nav-swiper" :indicator-dots="false" :autoplay="true" :interval="2000" :duration="500">
-					<swiper-item v-for="(item, index) in carPicture" :key="index">
+					<swiper-item v-if="item" v-for="(item, index) in carPicture" :key="index">
 						<image class="swiper-item" mode="aspectFill" @tap="previewImage(index)" :src="item"></image>
 					</swiper-item>
 				<!-- 	<swiper-item>

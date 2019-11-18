@@ -474,7 +474,7 @@
         ,{
             "path" : "pages/userAgreement/userAgreement",
             "style" : {
-				"navigationBarTitleText": "用户协议",
+				"navigationBarTitleText": "用户注册与隐私保护服务协议",
 				"enablePullDownRefresh": false //是否开启下拉的刷新
 			}
         }

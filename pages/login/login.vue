@@ -15,7 +15,7 @@
 		<view class="checkThe-bos">
 			<view class="flex justify-between checkThe">
 				<view class="">登录代表你同意</view>
-				<view class="checkThe-user" style="color: #8D77FF;" @tap="jump">《用户协议》</view>
+				<view class="checkThe-user" style="color: #8D77FF;" @tap="jump">《用户注册与隐私保护服务协议》</view>
 			</view>
 		</view>
 		
@@ -183,10 +183,12 @@ export default {
 	}
 }
 .checkThe{
-	width: 320upx;
-	margin: 0 auto ;
+  padding: 20rpx;
 	color: #d7d7d7;
 	font-size: 24upx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }
 .checkThe-bos{
