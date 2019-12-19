@@ -5,9 +5,9 @@
 		<view class="indexImage">
       <template v-if="carPicture.length">
         <view class="indexImages" v-for="(item, index) in carPicture" :key="item">
-          <image class="indexImages-image" :src="item" mode="mode"></image>
+          <image class="indexImages-image" :src="item" mode="aspectFill"></image>
           <view class="del-btn" @click="removeUploadImg(index)">
-            <image src="../../static/icon/delete.png" mode="mode"></image>
+            <image src="../../static/icon/delete.png" mode="aspectFill"></image>
           </view>
         	<text class="indexImages-title">
         		车辆照片

@@ -78,7 +78,7 @@
 							<checkbox :value="item.carId" :checked="item.checked" />
 						</label>
 						<view class="layout" :data-carid="item.carId" @tap="jump">
-							<image :src="item.carImg1"></image>
+							<image :src="item.carImg1" mode="aspectFill"></image>
 							<view class="layoutList">
 								<text class="layoutList-a layoutList-width">{{ item.brandSeries }}</text>
 								<view class="layoutList-b layoutList-width flex ">

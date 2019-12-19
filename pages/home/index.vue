@@ -88,7 +88,7 @@
 				<view class="vehicleList-content">
 					<view class="vehicleList-contents" v-for="(item , index) in favoriteList" :key="index">
 						<view class="layout" @tap="vehicleDetails(item.carId)">
-							<image :src="item.carImg1"></image>
+							<image :src="item.carImg1" mode="aspectFill"></image>
 							<view class="layoutList">
 								<text class="layoutList-a layoutList-width">{{ item.brandSeries }}</text>
 								<view class="layoutList-b layoutList-width flex ">

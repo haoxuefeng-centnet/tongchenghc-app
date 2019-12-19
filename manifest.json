@@ -125,6 +125,47 @@
         "splashscreen" : {
             "waiting" : true,
             "delay" : 3000
+        },
+        "nativePlugins" : {
+            "JY-JPush" : {
+                "android_appkey" : "c08db16450be85f557e6c52b",
+                "ios_appkey" : "c08db16450be85f557e6c52b",
+                "ios_channel" : "",
+                "android_channel" : "",
+                "__plugin_info__" : {
+                    "name" : "JYJPush极光推送插件 - 支持iOS/Android",
+                    "description" : "极光推送Uni版本",
+                    "platforms" : "Android,iOS",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=741",
+                    "android_package_name" : "io.dcloud.UNI59F5329",
+                    "ios_bundle_id" : "io.dcloud.UNI59F5329",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "741",
+                    "parameters" : {
+                        "android_appkey" : {
+                            "des" : "极光推送的APPKEY",
+                            "key" : "JPUSH_APPKEY",
+                            "value" : ""
+                        },
+                        "ios_appkey" : {
+                            "des" : "极光推送的APPKEY",
+                            "key" : "JPUSH_APPKEY",
+                            "value" : ""
+                        },
+                        "ios_channel" : {
+                            "des" : "极光推送的渠道名称",
+                            "key" : "JPUSH_CHANNEL",
+                            "value" : ""
+                        },
+                        "android_channel" : {
+                            "des" : "极光推送的渠道名称",
+                            "key" : "JPUSH_CHANNEL",
+                            "value" : ""
+                        }
+                    }
+                }
+            }
         }
     },
     /* SDK配置 */

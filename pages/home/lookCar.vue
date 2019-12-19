@@ -60,7 +60,7 @@
               <checkbox :value="item.carId" :checked="item.checked" />
             </label>
             <view class="layout" @tap="lesJump(item.carId)">
-              <image :src="item.carImg1"></image>
+              <image :src="item.carImg1" mode="aspectFill"></image>
               <view class="layoutList">
                 <text class="layoutList-a layoutList-width">{{ item.brandSeries || '——' }}</text>
                 <view class="layoutList-b layoutList-width">
@@ -77,7 +77,7 @@
                     <!-- 											<text class="layoutList-c-prices" style=" text-decoration: line-through;">{{ item.costPrice }}万</text>
  -->
                   </view>
-                  <text class="layoutList-c-right layoutList-c-prices">{{item.createTime}}</text>
+                  <!-- <text class="layoutList-c-right layoutList-c-prices">{{item.createTime}}</text> -->
                 </view>
               </view>
             </view>

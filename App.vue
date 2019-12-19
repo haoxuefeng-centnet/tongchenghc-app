@@ -50,31 +50,58 @@
 		onLaunch: function() {
 		// 消息推送
 		// #ifdef APP-PLUS
-		// const info = plus.push.getClientInfo();
-		// console.log( JSON.stringify( info ) );
-		const _self = this;
-		const _handlePush = function(message) {
-			plus.nativeUI.toast('接收到了消息～～～');
-			if(message) {
-				_self.getSystemInfo(message);
-				setTimeout(() => {
-					// 清空当前消息记录
-					plus.push.remove( message );
-				}, 500);
-				}
-		}
-		// 从系统消息中心点击消息启动应用事件
-			plus.push.addEventListener('click', function(message) {
-				// plus.nativeUI.toast('push click');
-				_handlePush(message);
+		  const jyJPush = uni.requireNativePlugin('JY-JPush');
+		// const _self = this;
+		// const _handlePush = function(message) {
+		// 	plus.nativeUI.toast('接收到了消息～～～');
+		// 	if(message) {
+		// 		_self.getSystemInfo(message);
+		// 		setTimeout(() => {
+		// 			// 清空当前消息记录
+		// 			plus.push.remove( message );
+		// 		}, 500);
+		// 		}
+		// }
+		// // 从系统消息中心点击消息启动应用事件
+		// 	plus.push.addEventListener('click', function(message) {
+		// 		// plus.nativeUI.toast('push click');
+		// 		_handlePush(message);
+		// 	});
+		// 	// 用从推送服务器接收到推送消息事件
+		// 		plus.push.addEventListener('receive', function(message) {
+		// 			// plus.nativeUI.toast('push receive');
+		// 			// _handlePush(message);
+		// 			if (message) {
+		// 				 plus.push.remove( message );
+		// 			}
+		// 	});
+		
+			jyJPush.setJYJPushAlias({
+			//  按照自己的业务需求来设置
+			userAlias: '这里是需要设置的userAlias'
+			}, result=> {
+			//  设置成功或者失败，都会通过这个result回调返回数据；数据格式保持极光返回的安卓/iOS数据一致
+			//  注：若没有返回任何数据，考虑是否初始化完成
+			uni.showToast({
+			icon:'none',
+			title: JSON.stringify(result)
+			})
 			});
-			// 用从推送服务器接收到推送消息事件
-				plus.push.addEventListener('receive', function(message) {
-					// plus.nativeUI.toast('push receive');
-					// _handlePush(message);
-					if (message) {
-						 plus.push.remove( message );
-					}
+			
+			jyJPush.deleteJYJPushAlias({
+			//  可以不用传值进去，但是需要配置这项数据
+			}, result=> {
+			uni.showToast({
+			icon:'none',
+			title: JSON.stringify(result)
+			})
+			});
+			jyJPush.addJYJPushReceiveOpenNotificationListener(result=> {
+			//  监听成功后，若点击推送消息，会触发result；数据格式保持极光返回的安卓/iOS数据一致
+			uni.showToast({
+			icon:'none',
+			title: JSON.stringify(result)
+			})
 			});
 		// #endif
 		},
