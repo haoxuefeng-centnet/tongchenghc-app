@@ -89,17 +89,18 @@ export const req = (cifg = {}) => {
 								default: 
 									msg = data.msg;
 							}
-							utils.showTextToast(msg)
+							utils.showTextToast(msg);
 						}
+            utils.hideLoading();
 					reslove(data || {})
 				},
 				fail: (err) => {
 					utils.showTextToast(err.errMsg);
+          utils.hideLoading();
 					reject(err)
 				},
 				complete: () => {
 					if (showLoading) {
-						utils.hideLoading()
 						isLoading = true
 					}
 				}

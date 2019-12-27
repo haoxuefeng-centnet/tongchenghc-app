@@ -116,6 +116,9 @@
     cusloginout
   } from '../../api/login.js';
   import utils from '../../utils/utils.js';
+  // #ifdef APP-PLUS
+  const jyJPush = uni.requireNativePlugin('JY-JPush');
+  // #endif
   export default {
     data() {
       return {
@@ -126,6 +129,13 @@
       };
     },
     onShow() {
+      const cusToken = uni.getStorageSync('cusToken');
+      if (!cusToken) {
+        wx.reLaunch({
+          url: '/pages/login/login',
+        })
+        return;
+      }
       // 用户信息
       getUser().then(res => {
         if (res.code === 200) {
@@ -174,6 +184,7 @@
       },
       // 退出登陆
       loggedOut() {
+        const that = this;
         uni.showModal({
           title: '提示',
           content: '您确认退出登录吗?',
@@ -182,6 +193,9 @@
               cusloginout().then(res => {
                 if (res.code == 200) {
                   uni.clearStorage();
+                  // #ifdef APP-PLUS
+                    that.deleteJgAlias();
+                  // #endif
                   uni.reLaunch({
                     url: '../home/index',
                   });
@@ -191,6 +205,15 @@
               })
             }
           }
+        });
+      },
+      // 删除极光推送的别名
+      deleteJgAlias() {
+        // 删除别名
+        jyJPush.deleteJYJPushAlias({
+        //  可以不用传值进去，但是需要配置这项数据
+        }, result=> {
+         console.log('delete_alias-> ' +  JSON.stringify(result));
         });
       },
       jump() {

@@ -93,10 +93,10 @@
 			    provider: 'weixin',
           scene: "WXSceneSession",
 			    type: 5,
-			    imageUrl: 'http://img.schyxgl.com/IOSshare.png',
+			    imageUrl: 'http://img.schyxgl.com/logo2.jpg',
 			    title: '车辆列表',
 			    miniProgram: {
-			        id: 'gh_628d05d77557',
+			        id: 'gh_c02989c31ca7',
 			        path: sharePath,
 			        type: 0,
 			        webUrl: 'http://uniapp.dcloud.io'
@@ -104,6 +104,7 @@
 			    success: ret => {
 			    },
 					fail(err) {
+            console.log(JSON.stringify(err));
 						utils.showTextToast('调起分享失败');
 					}
 			});

@@ -2,7 +2,7 @@
     "name" : "同行好车",
     "appid" : "__UNI__50C2771",
     "description" : "专注于二手车同行批发，车商店铺管理电商平台，在这里能够找寻车源信息，并进行二手车批发，，既包含为车商提供B2B服务等，成立于2015年3月，为车商提供更好的找车管理平台",
-    "versionName" : "1.0.0",
+    "versionName" : "1.0.1",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -68,19 +68,22 @@
                 "oauth" : {
                     "weixin" : {
                         "appid" : "wxfa418b8b8ebd7b49",
-                        "appsecret" : "37866a8e32c1525ebe85abd490955263"
+                        "appsecret" : "37866a8e32c1525ebe85abd490955263",
+                        "UniversalLinks" : "https://help.wechat.com/"
                     }
                 },
                 "payment" : {
                     "weixin" : {
-                        "appid" : "wxfa418b8b8ebd7b49"
+                        "appid" : "wxfa418b8b8ebd7b49",
+                        "UniversalLinks" : "https://help.wechat.com/"
                     },
                     "alipay" : {}
                 },
                 "share" : {
                     "weixin" : {
                         "appid" : "wxfa418b8b8ebd7b49",
-                        "appsecret" : "37866a8e32c1525ebe85abd490955263"
+                        "appsecret" : "37866a8e32c1525ebe85abd490955263",
+                        "UniversalLinks" : "https://help.wechat.com/"
                     }
                 },
                 "push" : {
@@ -178,8 +181,8 @@
         "setting" : {
             "urlCheck" : false,
             "es6" : true,
-            "minified" : true,
-            "postcss" : true
+            "minified" : false,
+            "postcss" : false
         },
         "permission" : {
             "scope.userLocation" : {

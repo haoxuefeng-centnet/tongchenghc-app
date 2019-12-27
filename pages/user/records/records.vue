@@ -4,13 +4,13 @@
 		<scroll-view scroll-y style="height: 100%;" v-if="cusType === 0">
 			<uni-collapse :accordion="true" @change="collapseChange">
 				<view class="more-container" v-for="item in list" :key="item.cusId">
-					<uni-collapse-item :title="item.cusNick" :show-animation="true" :image="item.cusAvatar" :open="item.open" @loadMore="loadMore" :isShowMoreBtn="isLoadingmore">
-						<view class="more-item">
+					<uni-collapse-item :title="item.cusNick"
+             :show-animation="true" :image="item.cusAvatar"
+             :open="item.open" @loadMore="loadMore"
+             :isShowMoreBtn="isLoadingmore"
+             @onClick="onClick">
 							<scroll-view scroll-y style="height:100%;">
-               <!-- <view class="">
-                  <text>{{childList.length}}</text>
-                </view> -->
-								<navigator :url="'recordsdetails/recordsdetails?shareId='+ grid.shareId" v-for="grid in childList" :key="grid.cusId">
+								<navigator :url="'recordsdetails/recordsdetails?shareId='+ grid.shareId" v-for="(grid, gdx) in childList" :key="gdx">
 									<view class="records-list flex flex-direction">
 										<view class="recordsList flex">
 											<image :src="grid.sharePhoto" mode=""></image>
@@ -34,7 +34,6 @@
 									</view>
 								</navigator>
 							</scroll-view>
-						</view>
 					</uni-collapse-item>
 				</view>
 				
@@ -129,7 +128,7 @@
 		},
 		methods: {
 			collapseChange(activeItem) {
-				this.currentPage = 1
+				this.currentPage = 1;
 				if (!activeItem.length) {
 					return false;
 				}
@@ -150,6 +149,11 @@
 				this.currentPage++;
 				this.getItemData();
 			},
+      onClick(onff) {
+        if (!onff) {
+          this.childList = [];
+        }
+      },
 			// 加载浏览数据
 			getItemData(callback) {
 				this.childList = [];
@@ -198,7 +202,7 @@
 	}
 	.recordsss{
 		width: 93%;
-		overflow: hidden;
+		// overflow: hidden;
 		margin: 10upx auto;
 		background: rgba(255, 255, 255, 1);
 		border-radius: 10upx;
@@ -207,7 +211,7 @@
 	.recordss {
 		width: 100%;
 		background: rgba(255, 255, 255, 1);
-		margin-top:20upx ;
+		margin-top:20upx;
 	}
 
 	.tiells {
@@ -321,6 +325,7 @@
 	}
 	.more-container {
 		background: #fff;
+    // height: 600upx;
 	}
 	.recordsList-right{
 		max-width: 500upx;
