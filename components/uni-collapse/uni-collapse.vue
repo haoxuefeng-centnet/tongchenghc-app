@@ -1,5 +1,5 @@
 <template>
-	<view class="records">
+	<view class="uni-collapse-container">
 		<slot />
 	</view>
 </template>
@@ -38,7 +38,9 @@
 </script>
 <style>
 	@charset "UTF-8";
-
+.uni-collapse-container {
+  height: 100%;
+}
 	.uni-collapse {
 		background-color: #fff;
 		position: relative;

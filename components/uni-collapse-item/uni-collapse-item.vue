@@ -9,7 +9,7 @@
 				<text class="iconfont"  style="color: #6B73FF;">&#xe60b;</text>
 			</view>
 		</view>
-		<view :class="{'uni-collapse-cell--animation':showAnimation===true}" :style="{height:isOpen ? height : '0px'}" class="uni-collapse-cell__content">
+		<view :class="{'uni-collapse-cell--animation':showAnimation===true}" :style="{height:isOpen ? height : '100%'}" class="uni-collapse-cell__content">
 			<view :id="elId">
 				<slot />
 				<view class="load-more" v-if="isShowMoreBtn" @tap="loadMore">查看更多</view>
@@ -104,9 +104,15 @@
 				this.$emit('loadMore');
 			},
 			getSize() {
+        console.log(this.showAnimation);
 				if (this.showAnimation) {
 					uni.createSelectorQuery().in(this).select(`#${this.elId}`).boundingClientRect().exec((ret) => {
-						this.height = ret[0].height + 'px'
+            console.log('ret', ret);
+            if (ret[0].height > 0) {
+             	this.height = ret[0].height + 'px';
+            } else {
+              this.height = '100%';
+            }
 					})
 				}
 			},
@@ -122,7 +128,8 @@
 						vm.isOpen = false
 					})
 				}
-				this.isOpen = !this.isOpen
+				this.isOpen = !this.isOpen;
+        this.$emit('onClick', this.isOpen);
 				this.collapse.onChange && this.collapse.onChange()
 			}
 		}

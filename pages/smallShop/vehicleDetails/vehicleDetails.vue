@@ -227,7 +227,7 @@ export default {
 			uni.share({
 			    provider: 'weixin',
 			    type: 5,
-			    imageUrl: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/app/share-logo@3.png',
+			    imageUrl: 'http://img.schyxgl.com/logo2.jpg',
 			    title: '微店车辆详情',
 			    miniProgram: {
 			        id: 'gh_c02989c31ca7',

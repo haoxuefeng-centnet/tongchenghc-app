@@ -31,7 +31,7 @@
     <view class="operate" @tap="jumpbalance">
       <view class="viso">
         <text>我的账户</text>
-        <text class=" rightImg" style="font-size:28upx;color:rgba(250,44,34,1); right: 55upx;">余额:￥{{userInfo.surplusMoney || 0}}</text>
+        <text class=" rightImg" style="font-size:28upx;color:rgba(250,44,34,1); right: 55upx;">余额:￥{{userInfo.surplusMoney}}</text>
         <text class="iconfont rightImg">&#xe627;</text>
       </view>
     </view>
@@ -117,7 +117,7 @@
   } from '../../api/login.js';
   import utils from '../../utils/utils.js';
   // #ifdef APP-PLUS
-     const jyJPush = uni.requireNativePlugin('JY-JPush');
+  const jyJPush = uni.requireNativePlugin('JY-JPush');
   // #endif
   export default {
     data() {
@@ -129,9 +129,10 @@
       };
     },
     onShow() {
-      if (!uni.getStorageSync('cusToken')) {
-        uni.navigateTo({
-          url: '../login/login'
+      const cusToken = uni.getStorageSync('cusToken');
+      if (!cusToken) {
+        wx.reLaunch({
+          url: '/pages/login/login',
         })
         return;
       }
@@ -183,6 +184,7 @@
       },
       // 退出登陆
       loggedOut() {
+        const that = this;
         uni.showModal({
           title: '提示',
           content: '您确认退出登录吗?',
@@ -191,6 +193,9 @@
               cusloginout().then(res => {
                 if (res.code == 200) {
                   uni.clearStorage();
+                  // #ifdef APP-PLUS
+                    that.deleteJgAlias();
+                  // #endif
                   uni.reLaunch({
                     url: '../home/index',
                   });
@@ -198,13 +203,17 @@
                   utils.showTextToast('退出失败');
                 }
               })
-              // 删除极光推送别名
-              jyJPush.deleteJYJPushAlias({
-              }, result=> {
-                console.log('删除别名成功' + JSON.stringify(result) );
-              });
             }
           }
+        });
+      },
+      // 删除极光推送的别名
+      deleteJgAlias() {
+        // 删除别名
+        jyJPush.deleteJYJPushAlias({
+        //  可以不用传值进去，但是需要配置这项数据
+        }, result=> {
+         console.log('delete_alias-> ' +  JSON.stringify(result));
         });
       },
       jump() {

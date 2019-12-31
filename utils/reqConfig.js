@@ -5,8 +5,8 @@ let baseUrl = ''
 if(process.env.NODE_ENV === 'development') {
   // 测试请求地址
 
-baseUrl = 'http://192.168.0.115:8086/api-app'
-// baseUrl = 'https://app.schyxgl.com/api-app'
+// baseUrl = 'http://192.168.0.110:8086/api-app'
+baseUrl = 'https://app.schyxgl.com/api-app'
 } else if (process.env.NODE_ENV === 'production') {
  // 生产环境
    baseUrl = 'https://app.schyxgl.com/api-app'

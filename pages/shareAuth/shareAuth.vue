@@ -63,7 +63,8 @@
 						});
 					},
 					fail(err) {
-						utils.showTextToast('获取授权信息失败');
+            console.log(JSON.stringify(err));
+						// utils.showTextToast('获取授权信息失败');
 					}
 				});
 			},

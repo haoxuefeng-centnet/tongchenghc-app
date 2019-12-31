@@ -77,5 +77,8 @@ page {
 	text-align: left;
 	height: 100%;
 	line-height: 70upx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 </style>

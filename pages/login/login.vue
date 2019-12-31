@@ -38,26 +38,7 @@ export default {
 		};
 	},
 	onShow() {
-		// #ifdef APP-PLUS
-     const jyJPush = uni.requireNativePlugin('JY-JPush');
-		// 获取别名
-		jyJPush.getJYJPushAlias({
-		}, result=> {
-		 console.log('查询别名' + result.alias)
-		 // 有别名
-		 if (result.alias) {
-		   uni.setStorageSync('jg_alias', result.alias)
-		 } else {
-		   // 设置别名
-		   jyJPush.setJYJPushAlias({
-		   userAlias: that.getJiGuangAlias(),
-		   }, result=> {
-		   console.log('别名设置' + JSON.stringify(result))
-		    uni.setStorageSync('jg_alias', result.alias)
-		   });
-		 }
-		});
-		// #endif
+		
 	},
 	methods: {
 		phoneNum(event) {
@@ -101,9 +82,9 @@ export default {
 		formSubmit() {
 			// 获取手机唯一标识
 			// #ifdef APP-PLUS
+      const pushAlias = uni.getStorageSync('pushAlias');
+      console.log('提交别名', pushAlias);
       const sys = uni.getSystemInfoSync();
-      const sys_type = sys.platform === 'ios' ? 1 : 2;
-			const jg_alias = uni.getStorageSync('jg_alias') || '';
 			// #endif
 			if (/^1(3|4|5|6|7|8|9)\d{9}$/.test(this.phone)) {
 				if (this.code != '') {
@@ -111,11 +92,12 @@ export default {
 					 code: this.code,
 						position: this.position,
 						// #ifdef APP-PLUS
-						deviceCode: jg_alias,
-            deviceType: sys_type,
+						deviceCode: pushAlias,
+            deviceType: sys.platform === 'ios' ? 1 : 2,
 						// #endif
 						}).then(res => {
 						if (res.code == 200) {
+              uni.removeStorageSync('pushAlias');
 							uni.setStorageSync('cusToken', res.data.cusToken);
 							getUser().then(resdata => {
 								if (resdata.code == 200) {
