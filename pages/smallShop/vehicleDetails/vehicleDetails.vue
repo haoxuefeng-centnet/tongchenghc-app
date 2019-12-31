@@ -182,9 +182,12 @@ export default {
 	// #endif
 	// 获取上个页面车辆ID & 微店ID
 	onLoad(option) {
-		uni.hideShareMenu();
+    // #ifdef MP-WEIXIN
+    	uni.hideShareMenu();
+    // #endif
 		this.fromData.storeId = option.storeId;
 		this.fromData.carId = option.carid;
+    console.log('接收的参数---> ', JSON.stringify(option));
 	},
 	// 请求详情页信息
 	onShow() {

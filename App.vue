@@ -1,17 +1,12 @@
 <script>
 	import utils from "./utils/utils";
- // #ifdef APP-PLUS
-    const jyJPush = uni.requireNativePlugin('JY-JPush');
- // #endif
+  // #ifdef APP-PLUS
+  const jyJPush = uni.requireNativePlugin('JY-JPush');
+  // #endif
 	export default {
 		methods: {
-      // 生成极光推送所需要的别名
-      getJiGuangAlias() {
-        let alias = new Date().getFullYear() + Math.random().toString(36).substr(2);
-        return alias;
-      },
 			// 获取当前客户端平台
-			getSystemInfo(data) {
+			getSystemInfo() {
 				const that = this;
 				let key = null;
 				try {
@@ -21,36 +16,37 @@
 				    // error
 						console.log(JSON.stringify(err))
 				}
-				if (key) {
-					switch(key) {
-						case 'ios':
-						that.goCarInfo(1, data);
-						break;
-						case 'android':
-						that.goCarInfo(2, data);
-						break;
-						default:
-						console.error('没有获取到手机系统信息')
-					}
-				}
+        return key || '';
 			},
+      // 处理极光数据
+      resetJsPushData(data) {
+        const re = /[\\]/g;
+        const platform = this.getSystemInfo();
+        console.log('platform', platform);
+        if (platform === 'android') {
+         const notificationExtras = JSON.parse(data);
+         const params = JSON.parse(notificationExtras.params);
+         console.log('params-> ' + params.id);
+         uni.navigateTo({
+         	url: '/pages/Wishlist/wishDetails/wishDetails?reserveId=' + params.id
+         }) 
+        }
+      },
 			// 根据推送通知消息进入不同的详情
 			goCarInfo(type, data) {
 				if (type === 1) {
-					console.log('ios')
+					console.log('ios');
 					if (!data.payload.id) { return false; }
 					uni.navigateTo({
 						url: '/pages/Wishlist/wishDetails/wishDetails?reserveId=' + data.payload.id
 					})
 				} else if(type === 2) {
-					// const content = data.payload.replace(/[\\]/g, '');
-					// const message = JSON.parse(content);
+					const content = data.payload.replace(/[\\]/g, '');
+					const message = JSON.parse(content);
 					// console.log(JSON.stringify(message));
-          const res = JSON.parse(data);
-          const res2 = JSON.parse(res.params);
-					if ( typeof res2 !== 'object') { return false; }
+					if ( typeof data !== 'object') { return false; }
 					uni.navigateTo({
-						url: '/pages/Wishlist/wishDetails/wishDetails?reserveId=' + res2.id
+						url: '/pages/Wishlist/wishDetails/wishDetails?reserveId=' + message.id
 					})
 				} else {
 					console.error('获取数据失败')
@@ -58,11 +54,9 @@
 			}
 		},
 		onLaunch: function() {
-      const that = this;
 		// 消息推送
 		// #ifdef APP-PLUS
-    // 个推
-		// const _self = this;
+		const _self = this;
 		// const _handlePush = function(message) {
 		// 	plus.nativeUI.toast('接收到了消息～～～');
 		// 	if(message) {
@@ -86,48 +80,40 @@
 		// 				 plus.push.remove( message );
 		// 			}
 		// 	});
-    
-    // 极光推送
-    // jyJPush.getRegistrationID(result=> {
-    //  如果极光配置成功，则会返回正常数据，可以按照此项判断是否初始化成功
-    //  返回的数据会有registrationID，errorCode
-    //  若registrationID为0，则需要核对appkey和包名等
-    // console.log('初始化' + JSON.stringify(result));
-    // });
-    // 处理进程杀死
-    jyJPush.getLastPushInfo(result=> {
-        console.log("lastPushInfo = " + JSON.stringify(result));
-        if (result.errorCode == 0) {
-            //  没有数据或者其他错误
-            return;
-        }
-        //  这里处理点击事件，和addJYJPushReceiveOpenNotificationListener方法的事件一直就行
-      });
-      // jyJPush.deleteJYJPushAlias({
-      // }, result=> {
-      //   console.log('删除别名成功' + JSON.stringify(result) );
-      // });
-      // 点击消息
-      jyJPush.addJYJPushReceiveNewOpenNotificationListener(result=> {
-        console.log(JSON.stringify(result.notificationExtras));
-        that.getSystemInfo(result.notificationExtras)
-      });
-      //  iOS
-      jyJPush.ios_removeNotification(result=> {
-         console.log('iOS 删除消息' + JSON.stringify(result))
-      });
-      //  Android
-      jyJPush.android_clearAllNotifications(result=> {
-          console.log('android 删除消息' + JSON.stringify(result))
-      });
+		
+    // 极光
+    // 获取别名
+    jyJPush.getJYJPushAlias({
+    }, res=> {
+      console.log('get_alias', JSON.stringify(res));
+      if (!res.alias) {
+          const radomStr = Math.random().toString(36).slice(-8);
+          console.log('初始别名' + radomStr);
+          uni.setStorageSync('pushAlias', radomStr);
+        // 设置别名初始
+        	jyJPush.setJYJPushAlias({
+        	//  按照自己的业务需求来设置
+        	userAlias: radomStr,
+        	}, result=> {
+        	//  设置成功或者失败，都会通过这个result回调返回数据；数据格式保持极光返回的安卓/iOS数据一致
+        	//  注：若没有返回任何数据，考虑是否初始化完成
+           console.log('set_alias-> ' +  JSON.stringify(result));
+        	});
+      } else {
+        uni.setStorageSync('pushAlias', res.alias);
+        console.log('有别名' + res.alias);
+      }
+    });
+      
+			jyJPush.addJYJPushReceiveOpenNotificationListener(result=> {
+			//  监听成功后，若点击推送消息，会触发result；数据格式保持极光返回的安卓/iOS数据一致
+			 console.log('res' + JSON.stringify(result));
+       _self.resetJsPushData(result.notificationExtras);
+			});
 		// #endif
 		},
 		onShow: function() {
-      console.log('App.vue Show')
-        // let data = "{\"params\":\"{\\\"type\\\":\\\"reserve\\\",\\\"id\\\":71}\"}";
-        // const res = JSON.parse(data);
-        // const res2 = JSON.parse(res.params);
-        // console.log('接收到的数据' + JSON.stringify(res2));
+			console.log('App Show');
 		},
 		onHide: function() {
 			console.log('App Hide')

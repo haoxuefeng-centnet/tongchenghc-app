@@ -77,7 +77,7 @@
 						<label class="public-checkbox" v-if="isShare">
 							<checkbox :value="item.carId" :checked="item.checked" />
 						</label>
-						<view class="layout" :data-carid="item.carId" @tap="jump">
+						<view class="layout" @tap="jump(item)">
 							<image :src="item.carImg1" mode="aspectFill"></image>
 							<view class="layoutList">
 								<text class="layoutList-a layoutList-width">{{ item.brandSeries }}</text>
@@ -326,10 +326,10 @@
 				
 			},
 			// 车辆详情
-			jump(e) {
-				this.carid = e.currentTarget.dataset.carid || e.target.dataset.carid
+			jump(item) {
+				this.carid = item.carId;
 				uni.navigateTo({
-					url: `vehicleDetails/vehicleDetails?storeId=${this.storeId}&carid=${this.carid}`
+					url: `./vehicleDetails/vehicleDetails?storeId=${this.storeId}&carid=${this.carid}`
 				});
 			},
 			// 拨打电话

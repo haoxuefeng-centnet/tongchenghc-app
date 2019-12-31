@@ -170,7 +170,9 @@ export default {
 		onLoad(query) {
 			// 车辆ID
 			this.carId = query.carId
-			uni.hideShareMenu();
+			// #ifdef MP-WEIXIN
+				uni.hideShareMenu();
+			// #endif
 		},
 		// #ifdef MP-WEIXIN
 		onShareAppMessage(res) {
