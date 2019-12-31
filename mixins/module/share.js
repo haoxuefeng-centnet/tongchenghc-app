@@ -96,7 +96,7 @@
 			    imageUrl: 'http://img.schyxgl.com/IOSshare.png',
 			    title: '车辆列表',
 			    miniProgram: {
-			        id: 'gh_628d05d77557',
+			        id: 'gh_c02989c31ca7',
 			        path: sharePath,
 			        type: 0,
 			        webUrl: 'http://uniapp.dcloud.io'

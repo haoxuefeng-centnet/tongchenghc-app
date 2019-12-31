@@ -31,7 +31,7 @@
     <view class="operate" @tap="jumpbalance">
       <view class="viso">
         <text>我的账户</text>
-        <text class=" rightImg" style="font-size:28upx;color:rgba(250,44,34,1); right: 55upx;">余额:￥{{userInfo.surplusMoney}}</text>
+        <text class=" rightImg" style="font-size:28upx;color:rgba(250,44,34,1); right: 55upx;">余额:￥{{userInfo.surplusMoney || 0}}</text>
         <text class="iconfont rightImg">&#xe627;</text>
       </view>
     </view>
@@ -116,6 +116,9 @@
     cusloginout
   } from '../../api/login.js';
   import utils from '../../utils/utils.js';
+  // #ifdef APP-PLUS
+     const jyJPush = uni.requireNativePlugin('JY-JPush');
+  // #endif
   export default {
     data() {
       return {
@@ -126,6 +129,12 @@
       };
     },
     onShow() {
+      if (!uni.getStorageSync('cusToken')) {
+        uni.navigateTo({
+          url: '../login/login'
+        })
+        return;
+      }
       // 用户信息
       getUser().then(res => {
         if (res.code === 200) {
@@ -189,6 +198,11 @@
                   utils.showTextToast('退出失败');
                 }
               })
+              // 删除极光推送别名
+              jyJPush.deleteJYJPushAlias({
+              }, result=> {
+                console.log('删除别名成功' + JSON.stringify(result) );
+              });
             }
           }
         });

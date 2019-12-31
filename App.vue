@@ -1,7 +1,15 @@
 <script>
 	import utils from "./utils/utils";
+ // #ifdef APP-PLUS
+    const jyJPush = uni.requireNativePlugin('JY-JPush');
+ // #endif
 	export default {
 		methods: {
+      // 生成极光推送所需要的别名
+      getJiGuangAlias() {
+        let alias = new Date().getFullYear() + Math.random().toString(36).substr(2);
+        return alias;
+      },
 			// 获取当前客户端平台
 			getSystemInfo(data) {
 				const that = this;
@@ -35,12 +43,14 @@
 						url: '/pages/Wishlist/wishDetails/wishDetails?reserveId=' + data.payload.id
 					})
 				} else if(type === 2) {
-					const content = data.payload.replace(/[\\]/g, '');
-					const message = JSON.parse(content);
+					// const content = data.payload.replace(/[\\]/g, '');
+					// const message = JSON.parse(content);
 					// console.log(JSON.stringify(message));
-					if ( typeof data !== 'object') { return false; }
+          const res = JSON.parse(data);
+          const res2 = JSON.parse(res.params);
+					if ( typeof res2 !== 'object') { return false; }
 					uni.navigateTo({
-						url: '/pages/Wishlist/wishDetails/wishDetails?reserveId=' + message.id
+						url: '/pages/Wishlist/wishDetails/wishDetails?reserveId=' + res2.id
 					})
 				} else {
 					console.error('获取数据失败')
@@ -48,38 +58,76 @@
 			}
 		},
 		onLaunch: function() {
+      const that = this;
 		// 消息推送
 		// #ifdef APP-PLUS
-		// const info = plus.push.getClientInfo();
-		// console.log( JSON.stringify( info ) );
-		const _self = this;
-		const _handlePush = function(message) {
-			plus.nativeUI.toast('接收到了消息～～～');
-			if(message) {
-				_self.getSystemInfo(message);
-				setTimeout(() => {
-					// 清空当前消息记录
-					plus.push.remove( message );
-				}, 500);
-				}
-		}
-		// 从系统消息中心点击消息启动应用事件
-			plus.push.addEventListener('click', function(message) {
-				// plus.nativeUI.toast('push click');
-				_handlePush(message);
-			});
-			// 用从推送服务器接收到推送消息事件
-				plus.push.addEventListener('receive', function(message) {
-					// plus.nativeUI.toast('push receive');
-					// _handlePush(message);
-					if (message) {
-						 plus.push.remove( message );
-					}
-			});
+    // 个推
+		// const _self = this;
+		// const _handlePush = function(message) {
+		// 	plus.nativeUI.toast('接收到了消息～～～');
+		// 	if(message) {
+		// 		_self.getSystemInfo(message);
+		// 		setTimeout(() => {
+		// 			// 清空当前消息记录
+		// 			plus.push.remove( message );
+		// 		}, 500);
+		// 		}
+		// }
+		// // 从系统消息中心点击消息启动应用事件
+		// 	plus.push.addEventListener('click', function(message) {
+		// 		// plus.nativeUI.toast('push click');
+		// 		_handlePush(message);
+		// 	});
+		// 	// 用从推送服务器接收到推送消息事件
+		// 		plus.push.addEventListener('receive', function(message) {
+		// 			// plus.nativeUI.toast('push receive');
+		// 			// _handlePush(message);
+		// 			if (message) {
+		// 				 plus.push.remove( message );
+		// 			}
+		// 	});
+    
+    // 极光推送
+    // jyJPush.getRegistrationID(result=> {
+    //  如果极光配置成功，则会返回正常数据，可以按照此项判断是否初始化成功
+    //  返回的数据会有registrationID，errorCode
+    //  若registrationID为0，则需要核对appkey和包名等
+    // console.log('初始化' + JSON.stringify(result));
+    // });
+    // 处理进程杀死
+    jyJPush.getLastPushInfo(result=> {
+        console.log("lastPushInfo = " + JSON.stringify(result));
+        if (result.errorCode == 0) {
+            //  没有数据或者其他错误
+            return;
+        }
+        //  这里处理点击事件，和addJYJPushReceiveOpenNotificationListener方法的事件一直就行
+      });
+      // jyJPush.deleteJYJPushAlias({
+      // }, result=> {
+      //   console.log('删除别名成功' + JSON.stringify(result) );
+      // });
+      // 点击消息
+      jyJPush.addJYJPushReceiveNewOpenNotificationListener(result=> {
+        console.log(JSON.stringify(result.notificationExtras));
+        that.getSystemInfo(result.notificationExtras)
+      });
+      //  iOS
+      jyJPush.ios_removeNotification(result=> {
+         console.log('iOS 删除消息' + JSON.stringify(result))
+      });
+      //  Android
+      jyJPush.android_clearAllNotifications(result=> {
+          console.log('android 删除消息' + JSON.stringify(result))
+      });
 		// #endif
 		},
 		onShow: function() {
-			console.log('App Show')
+      console.log('App.vue Show')
+        // let data = "{\"params\":\"{\\\"type\\\":\\\"reserve\\\",\\\"id\\\":71}\"}";
+        // const res = JSON.parse(data);
+        // const res2 = JSON.parse(res.params);
+        // console.log('接收到的数据' + JSON.stringify(res2));
 		},
 		onHide: function() {
 			console.log('App Hide')
