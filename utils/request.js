@@ -91,16 +91,15 @@ export const req = (cifg = {}) => {
 							}
 							utils.showTextToast(msg);
 						}
-            utils.hideLoading();
-					reslove(data || {})
+					  reslove(data || {})
 				},
 				fail: (err) => {
 					utils.showTextToast(err.errMsg);
-          utils.hideLoading();
 					reject(err)
 				},
 				complete: () => {
 					if (showLoading) {
+            utils.hideLoading();
 						isLoading = true
 					}
 				}

@@ -239,7 +239,9 @@ export default class utils {
    * 隐藏加载提示
    */
   static hideLoading() {
-    uni.hideLoading();
+     setTimeout(function () {
+            uni.hideLoading();
+    }, 3000);
   }
 
   /**
