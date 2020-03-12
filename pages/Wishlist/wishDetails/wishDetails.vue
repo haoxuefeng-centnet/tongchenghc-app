@@ -32,10 +32,10 @@
 						<text class="nav-content-centerList-a">车辆类型</text>
 						<text class="nav-content-centerList-b">{{ageInformation.carType}}</text>
 					</view>
-					<view class="nav-content-centerList">
+					<!--<view class="nav-content-centerList">
 						<text class="nav-content-centerList-a">车身颜色</text>
 						<text class="nav-content-centerList-b">{{ageInformation.carColor}}</text>
-					</view>
+					</view>-->
 					<view class="nav-content-centerList">
 						<text class="nav-content-centerList-a">变速箱</text>
 						<text class="nav-content-centerList-b">{{ageInformation.carGearbox}}</text>

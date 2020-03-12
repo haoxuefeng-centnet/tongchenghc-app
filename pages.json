@@ -4,7 +4,8 @@
 			"path": "pages/home/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": false // 是否开启下拉的刷新
+				"enablePullDownRefresh": false, // 是否开启下拉的刷新
+				"navigationStyle" : "custom"
 			}
 		},
 		{

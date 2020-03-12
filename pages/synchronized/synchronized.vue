@@ -19,10 +19,10 @@
 		<!-- 基本信息 -->
 		<view class="index-text">基本信息</view>
 		<view class="boos">
-			<view class="boos-lise">
+			<!--<view class="boos-lise">
 				<view class="boos-title">车身颜色</view>
 				<text class="boos-content">黑色</text>
-			</view>
+			</view>-->
 			<view class="boos-lise">
 				<view class="boos-title">品牌车型</view>
 				<text class="boos-content">奥迪A6</text>

@@ -2,7 +2,7 @@
 <template>
 	<view>
 		<form>
-			<view class="flex align-center boos-lise" style="margin-bottom: 20upx;">
+			<!--<view class="flex align-center boos-lise" style="margin-bottom: 20upx;">
 				<view class="boos-title">车身颜色<text class="hint">*</text></view>
 				<view class="boos-nvget" style=" font-size: 30upx; line-height: 100upx;">{{formData.carColor}}</view>
 			</view>
@@ -13,6 +13,7 @@
 					</view>
 				</scroll-view>
 			</view>
+			-->
 			<view class="boos-lise" style="border-top: 1px solid #f3f3f3; margin-top: 30upx;">
 				<view class="boos-title">品牌车型</view>
 				<navigator hover-class="none" class="boos-nvget" url="../modelsChoose/brand">

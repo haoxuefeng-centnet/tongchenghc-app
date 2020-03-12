@@ -51,7 +51,7 @@
 		<!-- 基本信息 -->
 		<view class="index-text">基本信息</view>
 			<view class="boos">
-				<view class="flex align-center boos-lise">
+				<!--<view class="flex align-center boos-lise">
 					<view class="boos-title">车身颜色<text class="hint">*</text></view>
 					<view class="boos-picker-width" style=" font-size: 30upx;">{{backgrounds[TabCur].text}}</view>
 				</view>
@@ -60,7 +60,7 @@
 						<view class="boox-title-background-view" :class="{ on: TabCur == index, borderred: index == 0 && TabCur != index }" v-for="(item, index) in backgrounds"
 						 :style="'background:' + item.color + ';'" :key="index" @tap="tabSelect(item.text, index)" :data-id="index"></view>
 					</scroll-view>
-				</view>
+				</view>-->
 				<view class="vehicle">
 					<text class="vehicleContent">车辆类型<text class="hint">*</text></text>
 					<scroll-view class="vehicleList-a" scroll-with-animation="true" scroll-x="true">

@@ -18,10 +18,10 @@
 		<!-- 基本信息 -->
 		<view class="index-text">基本信息</view>
 		<form @submit="submitFrom">
-				<view class="boos-lise">
+				<!--<view class="boos-lise">
 					<view class="boos-title" style="margin: auto 0;">车身颜色</view>
 					<input placeholder="暂无" :value="carData.carColor" disabled="disabled" />
-				</view>
+				</view>-->
 				<view class="boos-lise">
 					<view class="boos-title" style="margin: auto 0;">车辆类型</view>
 					<input placeholder="暂无" :value="carData.carType" disabled="disabled" />

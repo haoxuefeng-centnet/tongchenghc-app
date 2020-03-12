@@ -31,11 +31,11 @@
 		<view class="index-text">基本信息</view>
 		<form @submit="submitFrom">
 			<view class="boos">
-				<view class="flex align-center boos-lise">
+				<!--<view class="flex align-center boos-lise">
 					<view class="boos-title">车身颜色<text class="hint">*</text></view>
 					<view class="boos-picker-width" style=" font-size: 30upx;">{{backgrounds[TabCur].text}}</view>
-				</view>
-				<view class="boox-title">
+				</view>-->
+				<!--<view class="boox-title">
 					<scroll-view class="boox-title-background" scroll-with-animation="true" scroll-x="true">
 						<view
 							class="boox-title-background-view"
@@ -47,7 +47,7 @@
 							:data-id="index"
 						></view>
 					</scroll-view>
-				</view>
+				</view>-->
 				<view class="boos-lise" style="border-top: 1upx solid  #f3f3f3; margin-top: 20upx;">
 					<view class="boos-title"><text>品牌车型</text><text class="hint">*</text></view>
 					<navigator hover-class="none" class="boos-nvget" url="../../modelsChoose/brand">
