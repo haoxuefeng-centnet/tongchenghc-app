@@ -94,13 +94,30 @@
 					<view class="boos-title">车牌号</view>
 					<input class="boos-picker-width" v-model="carLicense" type="text" maxlength="8" placeholder="请输入" />				
 				</view> -->
-				<view class="boos-lise">
+				<!--<view class="boos-lise">
 					<view class="boos-title">使用性质<text class="hint">*</text></view>
 					<picker class="boos-picker boos-picker-width" @change="natureChange" :value="index" :range="usingNature">
 						<view class="pickerboos" :class="carNature == '' ? 'active' : ''">{{ carNature != '' ? carNature : '请选择' }}</view>
 						<view class="iconfont boos-icons">&#xe627;</view>
 					</picker>
-				</view>
+				</view>-->
+                <view class="boos-lise">
+                    <view class="boos-title">车辆归属地<text class="hint">*</text></view>
+                    <navigator hover-class="none" class="boos-nvget" url="../home/city?type=1">
+                        <view class="nvgetboos" :class="belonging == '' ? 'active' : ''">{{ belonging != '' ? belonging : '请选择' }}</view>
+                        <text class="iconfont boos-icons">&#xe627;</text>
+                    </navigator>
+                </view>
+                <view class="vehicle">
+                    <text class="vehicleContent">使用性质<text class="hint">*</text></text>
+                    <scroll-view class="vehicleList-a" scroll-with-animation="true" scroll-x="true">
+                        <view class="vehicleContentName" :class="{ on: index == carNatureType }" @tap="natureChange(index)" v-for="(item, index) in usingNature" :key="index">
+                            {{ item }}
+                        </view>
+                    </scroll-view>
+                </view>
+
+
 				<!-- <view class="boos-lise">
 					<view class="boos-title">出厂日期</view>
 					<picker class="boos-picker boos-picker-width" mode="date" :value="startDate" start="1995-0-0" end="endDate"
@@ -129,32 +146,28 @@
 					<view class="boos-title">引擎号<text class="hint">*</text></view>
 					<input class="boos-picker-width" placeholder="请输入引擎号" :value="engineNumber" name="engineNumber" />
 				</view> -->
-				<view class="boos-lise">
+				<!--<view class="boos-lise">
 					<view class="boos-title">车辆所在地<text class="hint">*</text></view>
 					<navigator hover-class="none" class="boos-nvget" url="../home/city">
 						<view class="nvgetboos" :class="select == '' ? 'active' : ''">{{ select != '' ? select : '请选择' }}</view>
 						<text class="iconfont boos-icons">&#xe627;</text>
 					</navigator>
-				</view>
-				<view class="boos-lise">
-					<view class="boos-title">车辆归属地<text class="hint">*</text></view>
-					<navigator hover-class="none" class="boos-nvget" url="../home/city?type=1">
-						<view class="nvgetboos" :class="belonging == '' ? 'active' : ''">{{ belonging != '' ? belonging : '请选择' }}</view>
-						<text class="iconfont boos-icons">&#xe627;</text>
-					</navigator>
-				</view>
-				<view class="boos-lise">
+				</view>-->
+
+				<!--<view class="boos-lise">
 					<view class="boos-title">评估师</view>
 					<text class="boos-iconst-text" style="width: 42%;">系统默认为发布者</text>
-				</view>
-				<view class="boos-lise">
-					<view class="boos-title">变速箱<text class="hint">*</text></view>
-					<picker class="boos-picker boos-picker-width" @change="gearboxChange" :value="index" :range="gearbox">
-						<view class="pickerboos" :class="carGearbox == '' ? 'active' : ''">{{ carGearbox != '' ? carGearbox : '请选择' }}</view>
-						<text class="iconfont boos-icons">&#xe627;</text>
-					</picker>
-				</view>
-				<view class="vehicle">
+				</view>-->
+                <view class="vehicle">
+                    <text class="vehicleContent">变速箱<text class="hint">*</text></text>
+                    <scroll-view class="vehicleList-a" scroll-with-animation="true" scroll-x="true">
+                        <view class="vehicleContentName" :class="{ on: index == carGearboxType }" @tap="gearboxChange(index)" v-for="(item, index) in gearbox"
+                              :key="index">
+                            {{ item }}
+                        </view>
+                    </scroll-view>
+                </view>
+				<!--<view class="vehicle">
 					<text class="vehicleContent">排放标准<text class="hint">*</text></text>
 					<scroll-view class="vehicleList-a" scroll-with-animation="true" scroll-x="true">
 						<view class="vehicleContentName" :class="{ on: index == emissionsType }" @tap="chooseEmissionsType(index)" v-for="(item, index) in emissions"
@@ -162,7 +175,7 @@
 							{{ item }}
 						</view>
 					</scroll-view>
-				</view>
+				</view>-->
 				<view class="vehicle">
 					<text class="vehicleContent">燃油类型<text class="hint">*</text></text>
 					<scroll-view class="vehicleList-a" scroll-with-animation="true" scroll-x="true">
@@ -260,9 +273,11 @@ export default {
 			fuel: ['汽油', '柴油', '纯电', '混动', '燃气'],
 			fuelType: 0,
 			fuelOil: '汽油',
-			usingNature: ['营运', '非营运', '租赁营运', '租赁非营运'],
+			usingNature: ['营运', '非营运'],
+            carNatureType:0,
 			gearbox: ['手动', '自动'],
 			carGearbox: '',
+            carGearboxType:0,
 			smallShop: true,
 			platform: true,
 			carImg1: '',
@@ -378,12 +393,14 @@ export default {
 			this.fuelOil = this.fuel[index];
 		},
 		// 使用性质
-		natureChange(e) {
-			this.carNature = this.usingNature[e.detail.value];
+		natureChange(index) {
+			this.carNatureType = index;
+            this.carNature = this.usingNature[index];
 		},
 		// 选择变速箱
-		gearboxChange(e) {
-			this.carGearbox = this.gearbox[e.detail.value];
+		gearboxChange(index) {
+		    this.carGearboxType = index;
+			this.carGearbox = this.gearbox[index];
 		},
 		// 选择平台微店
 		selectShop(item) {
