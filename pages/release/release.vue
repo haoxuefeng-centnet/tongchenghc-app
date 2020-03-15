@@ -94,13 +94,6 @@
 					<view class="boos-title">车牌号</view>
 					<input class="boos-picker-width" v-model="carLicense" type="text" maxlength="8" placeholder="请输入" />				
 				</view> -->
-				<!--<view class="boos-lise">
-					<view class="boos-title">使用性质<text class="hint">*</text></view>
-					<picker class="boos-picker boos-picker-width" @change="natureChange" :value="index" :range="usingNature">
-						<view class="pickerboos" :class="carNature == '' ? 'active' : ''">{{ carNature != '' ? carNature : '请选择' }}</view>
-						<view class="iconfont boos-icons">&#xe627;</view>
-					</picker>
-				</view>-->
                 <view class="boos-lise">
                     <view class="boos-title">车辆归属地<text class="hint">*</text></view>
                     <navigator hover-class="none" class="boos-nvget" url="../home/city?type=1">
@@ -273,29 +266,29 @@ export default {
 			fuel: ['汽油', '柴油', '纯电', '混动', '燃气'],
 			fuelType: 0,
 			fuelOil: '汽油',
-			usingNature: ['营运', '非营运'],
+			usingNature: ['非营运','营运'],
             carNatureType:0,
+			carNature: '非营运',
 			gearbox: ['手动', '自动'],
-			carGearbox: '',
+			carGearbox: '手动',
             carGearboxType:0,
 			smallShop: true,
 			platform: true,
 			carImg1: '',
 			carImg2: '',
 			carImg3: '',
-			carNature: '',
 			carInfo: '',
 			platforms: 2,
 			microShop: 2,
 			brandSeries: '', //品牌车型
 			operation: '',
-      wholesalePrice:'',
-      carDescribe:'',
-      costPrice:'',
-      carLicense:'',
-      carMileage:'',
-      interPrice:'',
-      keySum:''
+		    wholesalePrice:'',
+		    carDescribe:'',
+		    costPrice:'',
+		    carLicense:'',
+		    carMileage:'',
+		    interPrice:'',
+		    keySum:''
 		};
 	},
 	onShow() {
@@ -430,10 +423,42 @@ export default {
 		// 提交
     selet(item) {
     	this.operation = item;
-      if (this.carOldBoadTime =='' || this.wholesalePrice == '' || this.brandSeries == ''|| this.carGearbox == '' || this.carMileage == ''||this.boardDate == ''||this.carNature == ''||this.cityLocation == '' ||this.cityAttribution == '' ||this.costPrice == '') {
-      	utils.showTextToast('请完善信息');
-      	return;
-      }
+		if(this.carPicture==''||this.carPicture==null){
+		 utils.showTextToast('请至少上传一张车辆照片');
+		return;	
+		}
+       if(this.carOldBoadTime ==''){
+		   utils.showTextToast('请选择初次上牌时间');
+		   return;
+	   }
+	   if(this.wholesalePrice ==''){
+	   		   utils.showTextToast('请填写批发价格');
+	   		   return;
+	   }
+		if(this.brandSeries ==''){
+			   utils.showTextToast('请选择车辆品牌车型');
+			   return;
+		}
+		if(this.carGearbox ==''){
+			   utils.showTextToast('请选择车辆变速箱');
+			   return;
+		}		  
+		if(this.carMileage ==''){
+			   utils.showTextToast('请填写车辆表显里程');
+			   return;
+		}	  
+		if(this.carNature ==''){
+			   utils.showTextToast('请选择车辆性质');
+			   return;
+		}	  
+		if(this.belonging ==''){
+			   utils.showTextToast('请选择车辆归属地');
+			   return;
+		}	
+		  if(this.costPrice ==''){
+		  	   utils.showTextToast('请填写车辆成本价');
+		  	   return;
+		  }	
       if(!/^\d+(\.\d{1,2})?$/.test(this.carMileage)){
         utils.showTextToast('表显里程小数点后最多两位');
         return;
@@ -446,7 +471,7 @@ export default {
       		carNature: this.carNature,
       		carFactoryTime: this.carFactoryTime,
       		carMaturityTime: this.carMaturityTime,
-      		cityAttribution: this.select,
+      		cityAttribution: this.belonging,
       		cityLocation: this.belonging,
       		fuelType: this.fuelOil,
       		carDischarge: this.carDischarge,
@@ -474,19 +499,21 @@ export default {
       			this.carColor = '白色'
       			this.carType = '轿车'
       			this.carOldBoadTime = ''
-      			this.carNature = ''
+      			this.carNatureType = 0
+				this.carNature = '非营运'
       			this.carFactoryTime = ''
       			this.carMaturityTime = ''
       			this.select = ''
       			this.belonging = ''
-      			this.fuelOil = ''
+      			this.fuelOil = '汽油'
       			this.carDischarge = ''
       			this.smallShop = true
       			this.platform = true
             this.microShop = 2
             this.platforms = 2
       			this.operation = ''
-      			this.carGearbox = ''
+      			this.carGearboxType = 0
+				this.carGearbox = '手动'
       			this.brandSeries = ''
             this.wholesalePrice = ''
             this.carLicense = ''
@@ -543,6 +570,7 @@ export default {
 	width: 100%;
 	padding: 16upx 0;
 	border-top: 1upx solid #f9f9f9;
+	margin-top: 60upx;
 }
 .boos-title {
 	width: 30%;

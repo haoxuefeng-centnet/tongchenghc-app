@@ -94,7 +94,8 @@
 			"path": "pages/release/release",
 			"style": {
 				"navigationBarTitleText": "发布",
-				"enablePullDownRefresh": false // 是否开启下拉的刷新
+				"enablePullDownRefresh": false ,// 是否开启下拉的刷新
+				"navigationStyle" : "custom"
 			}
 		},
 		{
@@ -149,7 +150,8 @@
 			"path": "pages/user/user",
 			"style": {
 				"navigationBarTitleText": "我的",
-				"enablePullDownRefresh": false // 是否开启下拉的刷新
+				"enablePullDownRefresh": false, // 是否开启下拉的刷新
+				"navigationStyle" : "custom"
 			}
 		},
 		{

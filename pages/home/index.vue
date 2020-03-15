@@ -312,7 +312,9 @@
 </script>
 
 <style scoped lang="less">
-	.home-page {}
+	.home-page {
+		margin-top: 60upx;
+	}
 
 	.home-list {
 		background: #fff;

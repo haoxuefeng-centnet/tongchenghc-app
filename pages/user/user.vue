@@ -63,12 +63,12 @@
         <text class="iconfont rightImg">&#xe627;</text>
       </view>
     </view>
-    <view class="operate" @tap="staff">
+    <!-- <view class="operate" @tap="staff">
       <view class="viso">
         <text>员工账号管理</text>
         <text class="iconfont rightImg">&#xe627;</text>
       </view>
-    </view>
+    </view> -->
     <navigator hover-class="none" url="bid/bid">
       <view class="operate">
         <view class="viso">
@@ -310,7 +310,6 @@
   .user {
     background: rgba(242, 242, 242, 1);
     padding-bottom: 8upx;
-
     .header {
       height: 220upx;
       background: #fff;
