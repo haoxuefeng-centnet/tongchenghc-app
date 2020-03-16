@@ -84,7 +84,7 @@
 				</view>
 				<view class="boos-lise">
 					<view class="boos-title">初次上牌<text class="hint">*</text></view>
-					<picker class="boos-picker" mode="date" :value="startDate" start="1995-0-0" end="endDate"
+					<picker fields="month" class="boos-picker" mode="date" :value="startDate" start="1995-0" end="endDate"
 					 @change="DateChange">
 						<view class="pickerboos" :class="carOldBoadTime == '' ? 'active' : ''">{{ carOldBoadTime != '' ? carOldBoadTime : '请选择' }}</view>
 						<view class="iconfont boos-icons"> &#xe627;</view>
@@ -548,15 +548,15 @@ export default {
 			const date = new Date();
 			let year = date.getFullYear();
 			let month = date.getMonth() + 1;
-			let day = date.getDate();
+			//let day = date.getDate();
 			if (type === 'start') {
 				year = year - 60;
 			} else if (type === 'end') {
 				year = year;
 			}
 			month = month > 9 ? month : '0' + month;
-			day = day > 9 ? day : '0' + day;
-			return `${year}-${month}-${day}`;
+		//	day = day > 9 ? day : '0' + day;
+			return `${year}-${month}`;
 		},
     // 删除已上传得瑟图片
     removeUploadImg(index){

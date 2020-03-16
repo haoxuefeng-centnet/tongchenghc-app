@@ -65,7 +65,7 @@
         </view>
         <view class="boos-lise">
           <view class="boos-title">初次上牌<text class="hint">*</text></view>
-          <picker class="boos-picker boos-picker-width" mode="date" :value="carOldBoadTime" start="1995-0-0" end="endDate"
+          <picker class="boos-picker boos-picker-width" fields="month" mode="date" :value="carOldBoadTime" start="1995-0" end="endDate"
             @change="DateChange">
             <view class="pickerboos" style="text-align: left;">{{ carOldBoadTime }}</view>
             <text class="iconfont boos-icons">&#xe627;</text>
@@ -76,13 +76,30 @@
           <input placeholder="请输入" name="carLicense" :value="carData.carLicense" />
           <text class="iconfont boos-icons">&#xe627;</text>
         </view> -->
-        <view class="boos-lise">
+		<navigator hover-class="none" url="../home/city?type=1">
+		  <view class="boos-lise">
+		    <view class="boos-title">车辆归属地<text class="hint">*</text></view>
+		    <view class="boos-picker boos-picker-width">
+		      <view class="pickerboos">{{ select }}</view>
+		      <text class="iconfont boos-icons">&#xe627;</text>
+		    </view>
+		  </view>
+		</navigator>
+		<view class="vehicle">
+		    <text class="vehicleContent">使用性质<text class="hint">*</text></text>
+		    <scroll-view class="vehicleList-a" scroll-with-animation="true" scroll-x="true">
+		        <view class="vehicleContentName" :class="{ on: index == carNatureType }" @tap="natureChange(index)" v-for="(item, index) in usingNature" :key="index">
+		            {{ item }}
+		        </view>
+		    </scroll-view>
+		</view>
+        <!-- <view class="boos-lise">
           <view class="boos-title">使用性质<text class="hint">*</text></view>
           <picker class="boos-picker boos-picker-width" @change="natureChange" :value="index" :range="usingNature">
             <view class="pickerboos" :class="carNature == '' ? 'active' : ''">{{ carNature != '' ? carNature : '请选择' }}</view>
             <text class="iconfont boos-icons">&#xe627;</text>
           </picker>
-        </view>
+        </view> -->
       <!--  <view class="boos-lise">
           <view class="boos-title">出厂日期</view>
           <picker class="boos-picker boos-picker-width" mode="date" :value="carFactoryTime" start="1995-0-0" end="endDate"
@@ -114,7 +131,7 @@
 					<input placeholder="请输入引擎号" :value="carData.engineNumber" name="engineNumber" />
 					<text class="iconfont boos-icons">&#xe627;</text>
 				</view> -->
-        <navigator hover-class="none" url="../home/city">
+ <!--       <navigator hover-class="none" url="../home/city">
           <view class="boos-lise">
             <view class="boos-title">车辆所在地<text class="hint">*</text></view>
             <view class="boos-picker boos-picker-width">
@@ -122,28 +139,29 @@
               <text class="iconfont boos-icons">&#xe627;</text>
             </view>
           </view>
-        </navigator>
-        <navigator hover-class="none" url="../home/city?type=1">
-          <view class="boos-lise">
-            <view class="boos-title">车辆归属地<text class="hint">*</text></view>
-            <view class="boos-picker boos-picker-width">
-              <view class="pickerboos">{{ select }}</view>
-              <text class="iconfont boos-icons">&#xe627;</text>
-            </view>
-          </view>
-        </navigator>
-        <view class="boos-lise justify-between">
+        </navigator> -->
+
+      <!--  <view class="boos-lise justify-between">
           <view class="boos-title">评估师</view>
           <input style="width: 85%;" disabled="false" :value="carData.cusNick" v-if="carData.cusNick" />
           <text class="boos-iconst-text" style="width: 42%;" v-else>系统默认为发布者</text>
-        </view>
-        <view class="boos-lise">
+        </view> -->
+        <!-- <view class="boos-lise">
           <view class="boos-title" style="margin: auto 0;">变速箱</view>
           <picker class="boos-picker boos-picker-width" @change="gearboxChange" :value="index" :range="gearbox">
             <view class="pickerboos">{{ carGearbox }}</view>
             <text class="iconfont boos-icons">&#xe627;</text>
           </picker>
-        </view>
+        </view> -->
+		<view class="vehicle">
+		    <text class="vehicleContent">变速箱<text class="hint">*</text></text>
+		    <scroll-view class="vehicleList-a" scroll-with-animation="true" scroll-x="true">
+		        <view class="vehicleContentName" :class="{ on: index == carGearboxType }" @tap="gearboxChange(index)" v-for="(item, index) in gearbox"
+		              :key="index">
+		            {{ item }}
+		        </view>
+		    </scroll-view>
+		</view>
         <view class="vehicle">
           <text class="vehicleContent">排放标准</text>
           <scroll-view class="vehicleList-a" scroll-with-animation="true" scroll-x="true">
@@ -342,15 +360,17 @@ export default {
 			fuel: ['汽油', '柴油', '纯电', '混动', '燃气'],
 			fuelType: '汽油',
 			fuelOil:0 ,
-			usingNature: ['运营', '非运营', '租赁运营', '租赁非运营'],
-			gearbox: ['手动变速箱', '自动变速箱'],
-			carGearbox: '请选择',
+			usingNature: ['非营运','营运'],
+			carNature: '非营运',
+			carNatureType:0,
+			gearbox: ['手动', '自动'],
+			carGearbox: '手动',
+			carGearboxType:0,
 			smallShop: true,
 			platform: true,
 			carImg1: '',
 			carImg2: '',
 			carImg3: '',
-			carNature: '请选择',
 			platforms: '',
 			microShop: '',
 			brandSeries: '', //品牌车型
@@ -365,14 +385,14 @@ export default {
 			calInsurance: '',
 			cbTax: '',
 			carStatus: '',
-      carPicture: [],
+            carPicture: [],
 		};
 	},
 	onLoad(query) {
 		this.carId = query.carId;
 		// this.carId = 251;
-		carInfo({ carId: this.carId }).then(res => {
-      this.carPicture = res.data.carImgList;
+	  	carInfo({ carId: this.carId }).then(res => {
+            this.carPicture = res.data.carImgList;
 			for(var i in res.data){
 				if(!res.data[i] && res.data[i] !== 0){
 					res.data[i] = ''
@@ -391,8 +411,8 @@ export default {
 			this.fuelType = res.data.fuelType;
       this.carType = res.data.carType;
 			if(this.select=='请选择'){
-				this.select=res.data.cityLocation;
-			this.belonging=res.data.cityAttribution;
+				this.select=res.data.cityAttribution;
+			    this.belonging=res.data.cityAttribution;
 			}
 			this.carGearbox = res.data.carGearbox;
 			this.purchaseTax = res.data.purchaseTax;
@@ -425,6 +445,17 @@ export default {
 					this.fuelOil = k;
 				}
 			}
+			for(var j = 0;j < this.usingNature.length;j++){
+				if(this.usingNature[j]==res.data.carNature){
+					this.carNatureType = j;
+				}
+			}
+			for(var l = 0;l < this.gearbox.length;l++){
+				if(this.gearbox[l]==res.data.carGearbox){
+					this.carGearboxType = l;
+				}
+			}
+			
 			if (res.data.microShop == 1) {
 				this.smallShop = false;
 				this.microShop = 1;
@@ -583,12 +614,14 @@ export default {
 			this.fuelType= this.fuel[index];
 		},
 		// 使用性质
-		natureChange(e) {
-			this.carNature = this.usingNature[e.detail.value];
+		natureChange(index) {
+			this.carNatureType = index;
+		    this.carNature = this.usingNature[index];
 		},
 		// 选择变速箱
-		gearboxChange(e) {
-			this.carGearbox = this.gearbox[e.detail.value];
+		gearboxChange(index) {
+		    this.carGearboxType = index;
+			this.carGearbox = this.gearbox[index];
 		},
 		// 选择平台微店
 		selectShop(item) {
@@ -632,10 +665,6 @@ export default {
 				utils.showTextToast('请选择使用性质');
 				return;
 			}
-			if (this.select == '') {
-				utils.showTextToast('请选择车辆所在地');
-				return;
-			}
 			if (this.belonging == '') {
 				utils.showTextToast('请选择车辆归属地');
 				return;
@@ -659,7 +688,7 @@ export default {
 				carNature: this.carNature,
 				carFactoryTime: this.carFactoryTime,
 				carMaturityTime: this.carMaturityTime,
-				cityLocation: this.select,
+				cityLocation: this.belonging,
 				cityAttribution: this.belonging,
 				fuelType: this.fuelType,
 				carDischarge: this.carDischarge,
@@ -704,15 +733,15 @@ export default {
 			const date = new Date();
 			let year = date.getFullYear();
 			let month = date.getMonth() + 1;
-			let day = date.getDate();
+			//let day = date.getDate();
 			if (type === 'start') {
 				year = year - 60;
 			} else if (type === 'end') {
 				year = year;
 			}
 			month = month > 9 ? month : '0' + month;
-			day = day > 9 ? day : '0' + day;
-			return `${year}-${month}-${day}`;
+			//day = day > 9 ? day : '0' + day;
+			return `${year}-${month}`;
 		}
 	}
 };
