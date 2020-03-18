@@ -402,7 +402,7 @@ export default {
 			this.carImg1 = res.data.carImg1;
 			this.carImg2 = res.data.carImg2;
 			this.carImg3 = res.data.carImg3;
-			this.carOldBoadTime = res.data.carOldBoadTime;
+			this.carOldBoadTime = res.data.carOldBoadTime.substr(0,7);
 			this.carFactoryTime = res.data.carFactoryTime;
 			this.carMaturityTime = res.data.carMaturityTime;
 			this.carNature = res.data.carNature;
