@@ -23,25 +23,29 @@
 					</view>
 					<view class="maintenance-text"  @tap="search()">搜索</view>
 				</view>
-				<scroll-view scroll-y style="height: 100%;">
-				<view class="maintenance-list flex flex-direction" v-for="(item , index) in list" :key="index" @tap="jump(item.resStatus,item.result)">
-					<view class="flex justify-between" style="margin-top: 10upx;" >
-						<view class="flex" style="color: #989898;">
-							<text>{{item.gmtCreateFmt}}</text>
+				<view style="height: calc(100vh - 580upx);overflow: auto;">
+					<!-- <scroll-view scroll-y > -->
+					<view class="maintenance-list flex flex-direction" v-for="(item , index) in list" :key="index" @tap="jump(item.resStatus,item.result)">
+						<view class="flex justify-between" style="margin-top: 10upx;" >
+							<view class="flex" style="color: #989898;">
+								<text>{{item.gmtCreateFmt}}</text>
+							</view>
+							<text style="color:#FA3930 ;" v-if="item.resStatus == 0">查询成功</text>
+							<text style="color:#FA3930 ;" v-if="item.resStatus == 1">无数据</text>
+							<text style="color:#FA3930 ;" v-if="item.resStatus == 2">查询中</text>
+							<text style="color:#FA3930 ;" v-if="item.resStatus == 3">查询失败</text>
 						</view>
-						<text style="color:#FA3930 ;" v-if="item.resStatus == 0">查询成功</text>
-						<text style="color:#FA3930 ;" v-if="item.resStatus == 1">无数据</text>
-						<text style="color:#FA3930 ;" v-if="item.resStatus == 2">查询中</text>
-						<text style="color:#FA3930 ;" v-if="item.resStatus == 3">查询失败</text>
+						<view style="font-size: 30upx; font-weight: 500;">
+							<text>VIN码：</text>
+							<text class="margingleft">{{item.carVin}}</text>
+						</view>
 					</view>
-					<view style="font-size: 30upx; font-weight: 500;">
-						<text>VIN码：</text>
-						<text class="margingleft">{{item.carVin}}</text>
-					</view>
+					<!-- </scroll-view> -->
+					<UiLoading :loadingType="loadingType"></UiLoading>
 				</view>
-			    </scroll-view>
+				
 			</view>
-			<UiLoading :loadingType="loadingType"></UiLoading>
+			
 		</view>
 		<PayModal :isShow="payModalShow" @hideModal="hideModal" @sendPay="submitOrder"></PayModal>
 	</view>
@@ -223,6 +227,7 @@
 		box-shadow: 3upx 2upx 8upx 0upx rgba(66, 71, 157, 0.22);
 		border-radius: 10upx;
 		padding-bottom:30upx;
+		height: 400upx;
 		view {
 			width: 93%;
 			margin: 0 auto;

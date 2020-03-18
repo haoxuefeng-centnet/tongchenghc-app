@@ -234,7 +234,7 @@ export default {
 	data() {
 		return {
       carPicture: [],
-			startDate: '',
+			startDate: '1995-0',
 			carOldBoadTime: '',
 			carFactoryTime: '',
 			carMaturityTime: '',
@@ -362,6 +362,7 @@ export default {
       });
 		},
 		DateChange(e) {
+			
 			this.carOldBoadTime = e.detail.value;
 		},
 		DateChanges(e) {
