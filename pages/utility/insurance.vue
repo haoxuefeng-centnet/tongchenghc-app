@@ -5,7 +5,7 @@
 			<view class="utility first flex flex-direction">
 				<view class="utility-top flex justify-between">
 					<view class="">VIN码({{vin.length}}/17)</view>
-					<input type="text" focus="true" maxlength="17" v-model="vin" />
+					<input type="text" focus="true" maxlength="17" v-model="vin" @focus="showKeyboard" />
 				</view>
 				<button class="base-bottow" type="primary" @tap="querys">
 					<text class="base-bottow-text">查 询</text>
@@ -45,8 +45,8 @@
 				</view>
 				
 			</view>
-			
 		</view>
+		<Keyboard ref="Keyboard" @keyboardValueChanged="keyboardValueChanged" @delKeyboard="delKeyboard"></Keyboard>
 		<PayModal :isShow="payModalShow" @hideModal="hideModal" @sendPay="submitOrder"></PayModal>
 	</view>
 </template>
@@ -58,17 +58,23 @@
 	import { payMixins} from '../../mixins/index.js'
 	import UiLoading from '../../colorui/components/ui-loading.vue'
 	import { loadMoreList } from '../../mixins/index.js';
+	import Keyboard from '../../components/PFUNI-Keyboard/Keyboard.vue';
 	export default {
 		mixins: [ payMixins,loadMoreList ],
 		components: { 
 			          PayModal,
-		              UiLoading 
+		              UiLoading, 
+					  Keyboard
 					},
 		data() {
 			return {
 				vin: '', //VIN码 
 				infoData:'',
-				carName:''
+				carName:'',
+				result:"" ,
+				licensePlate:[],
+				idx:-1,
+				index:-1, //调用键盘
 			}
 		},
 		onLoad(option) {
@@ -210,7 +216,21 @@
 		    search(){
 		    	this.params.vin = this.carName;
 		    	this.getList()
-		    }
+		    },
+			keyboardValueChanged(res){
+				console.log(res)
+				this.vin+=res
+			},
+			showKeyboard(){
+				this.$refs.Keyboard.showKeyboard()
+			},
+			delKeyboard(){
+				if(this.vin){
+					let str=this.vin
+					let res=str.substring(0,str.length-1)
+					this.vin=res;
+				}
+			}
 		}
 	}
 </script>

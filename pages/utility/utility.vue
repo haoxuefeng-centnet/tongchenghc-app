@@ -23,7 +23,7 @@
 					</view>
 					<view class="maintenance-text"  @tap="search()">搜索</view>
 				</view>
-				<scroll-view scroll-y style="height: 100%;">
+		          <view style="height: calc(100vh - 570upx);overflow: auto;">
 					<view class="maintenance-list flex flex-direction" v-for="(item , index) in list" :key="index" @tap="jump(item.resStatus,item.result)">
 						<view class="flex justify-between" style="margin-top: 10upx;" >
 							<view class="flex" style="color: #989898;">
@@ -39,9 +39,9 @@
 							<text class="margingleft">{{item.carVin}}</text>
 						</view>
 					</view>
-				</scroll-view>
-			</view>
-			<UiLoading :loadingType="loadingType"></UiLoading>
+					 <UiLoading :loadingType="loadingType"></UiLoading>
+		           </view>		
+			</view>	
 		</view>
 		<PayModal :isShow="payModalShow" @hideModal="hideModal" @sendPay="submitOrder"></PayModal>
 	</view>
@@ -206,6 +206,7 @@
 		box-shadow: 3upx 2upx 8upx 0upx rgba(66, 71, 157, 0.22);
 		border-radius: 10upx;
 		padding-bottom:30upx;
+		height: 400upx;
 		view {
 			width: 93%;
 			margin: 0 auto;

@@ -229,6 +229,7 @@ import cityData from '../../components/cityData.js';
 import { carPublish } from '../../api/release.js';
 import Upload from '../../utils/upload.js';
 import CoverImage from '../../components/yq-avatar/yq-avatar.vue';
+
 export default {
   components: { CoverImage },
 	data() {
